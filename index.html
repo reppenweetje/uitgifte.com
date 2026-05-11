@@ -137,7 +137,14 @@
       max-width: 560px;
     }
 
-    /* Coming soon pill */
+    /* Status row — coming soon + trust pills */
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
     .status {
       display: inline-flex;
       align-items: center;
@@ -151,6 +158,7 @@
       text-transform: uppercase;
       color: var(--gold);
       background: transparent;
+      white-space: nowrap;
     }
 
     .pulse-dot {
@@ -160,6 +168,13 @@
       background: var(--gold);
       flex-shrink: 0;
       animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    .check-icon {
+      width: 11px;
+      height: 11px;
+      flex-shrink: 0;
+      color: var(--gold);
     }
 
     @keyframes pulse {
@@ -414,6 +429,11 @@
     @media (max-width: 480px) {
       .frame { padding: 24px 20px 20px; }
       .topbar-meta { display: none; }
+      .status {
+        white-space: normal;
+        line-height: 1.45;
+        padding: 7px 14px;
+      }
     }
 
     /* ============ REDUCED MOTION ============ */
@@ -442,9 +462,17 @@
     <main class="hero">
 
       <div class="content">
-        <div class="status reveal r-2" role="status">
-          <span class="pulse-dot" aria-hidden="true"></span>
-          <span>Coming soon</span>
+        <div class="status-row reveal r-2">
+          <div class="status" role="status">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span>Coming soon</span>
+          </div>
+          <div class="status" title="Opgebouwd en ingericht volgens het Didam-arrest (HR 26 november 2021)">
+            <svg class="check-icon" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 6.5 L5 9 L9.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Didam-proof opgebouwd &amp; ingericht</span>
+          </div>
         </div>
 
         <h1 class="headline reveal r-3">
