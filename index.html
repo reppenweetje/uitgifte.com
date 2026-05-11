@@ -17,15 +17,15 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap">
   <style>
     :root {
-      --paper: #f5f1e8;
-      --paper-soft: #ede8dc;
-      --ink: #161513;
-      --ink-soft: #3b3833;
-      --ink-dim: #8a857c;
-      --line: #d5cfc0;
+      --paper: #faf7ee;
+      --paper-soft: #f1ece0;
+      --ink: #1c1a17;
+      --ink-soft: #524d45;
+      --ink-dim: #a09a90;
+      --line: #e2dcca;
       --gold: #b08533;
-      --gold-soft: rgba(176, 133, 51, 0.10);
-      --gold-mid: rgba(176, 133, 51, 0.45);
+      --gold-soft: rgba(176, 133, 51, 0.075);
+      --gold-mid: rgba(176, 133, 51, 0.38);
 
       --font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --tracking-caps: 0.18em;
@@ -61,8 +61,8 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image: radial-gradient(rgba(22, 21, 19, 0.035) 1px, transparent 1px);
-      background-size: 28px 28px;
+      background-image: radial-gradient(rgba(28, 26, 23, 0.024) 1px, transparent 1px);
+      background-size: 32px 32px;
       z-index: 0;
     }
 
@@ -75,12 +75,12 @@
       z-index: 1;
       min-height: 100vh;
       min-height: 100dvh;
-      max-width: 1280px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 32px 80px 28px;
+      padding: 26px 72px 22px;
       display: grid;
       grid-template-rows: auto 1fr auto;
-      gap: 28px;
+      gap: 20px;
     }
 
     /* ============ TOPBAR ============ */
@@ -96,15 +96,15 @@
       align-items: center;
       gap: 0.55em;
       font-weight: 600;
-      font-size: 0.82rem;
+      font-size: 0.74rem;
       letter-spacing: var(--tracking-caps);
       color: var(--ink);
       text-transform: uppercase;
     }
 
     .wm-dot {
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
       background: var(--gold);
       transform: rotate(45deg);
       display: inline-block;
@@ -112,7 +112,7 @@
     }
 
     .topbar-meta {
-      font-size: 0.7rem;
+      font-size: 0.66rem;
       letter-spacing: var(--tracking-caps-wide);
       text-transform: uppercase;
       color: var(--ink-dim);
@@ -124,17 +124,17 @@
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-      gap: 96px;
+      gap: 80px;
       align-items: center;
-      padding: 16px 0;
+      padding: 8px 0;
     }
 
     .content {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 26px;
-      max-width: 560px;
+      gap: 20px;
+      max-width: 540px;
     }
 
     /* Status row — coming soon + trust pills */
@@ -148,11 +148,11 @@
     .status {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 7px 16px 7px 14px;
+      gap: 9px;
+      padding: 5px 13px 5px 11px;
       border: 1px solid var(--gold);
       border-radius: 999px;
-      font-size: 0.7rem;
+      font-size: 0.64rem;
       font-weight: 600;
       letter-spacing: var(--tracking-caps-wide);
       text-transform: uppercase;
@@ -162,8 +162,8 @@
     }
 
     .pulse-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--gold);
       flex-shrink: 0;
@@ -171,8 +171,8 @@
     }
 
     .check-icon {
-      width: 11px;
-      height: 11px;
+      width: 10px;
+      height: 10px;
       flex-shrink: 0;
       color: var(--gold);
     }
@@ -186,9 +186,9 @@
     .headline {
       margin: 0;
       font-weight: 300;
-      font-size: clamp(2.2rem, 5vw, 4.1rem);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
+      font-size: clamp(1.85rem, 4.1vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.018em;
       color: var(--ink);
       max-width: 18ch;
     }
@@ -198,18 +198,18 @@
     /* Body copy */
     .sub {
       margin: 0;
-      font-size: clamp(1rem, 1.2vw, 1.12rem);
+      font-size: clamp(0.93rem, 1.05vw, 1.02rem);
       line-height: 1.6;
       color: var(--ink-soft);
-      max-width: 46ch;
+      max-width: 48ch;
     }
 
     .support {
       margin: 0;
-      font-size: 0.92rem;
+      font-size: 0.84rem;
       line-height: 1.55;
       color: var(--ink-dim);
-      max-width: 46ch;
+      max-width: 48ch;
       font-style: italic;
     }
 
@@ -217,17 +217,17 @@
     .cta {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
-      padding: 14px 28px 14px 32px;
+      gap: 12px;
+      padding: 12px 24px 12px 28px;
       border: 1px solid var(--gold);
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: var(--tracking-caps);
       text-transform: uppercase;
       color: var(--ink);
       background: transparent;
-      margin-top: 8px;
+      margin-top: 4px;
       transition: background 240ms var(--ease), color 240ms var(--ease), border-color 240ms var(--ease);
     }
 
@@ -255,7 +255,7 @@
       position: relative;
       aspect-ratio: 6 / 5;
       width: 100%;
-      max-width: 560px;
+      max-width: 480px;
       justify-self: end;
     }
 
@@ -310,9 +310,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 24px;
+      padding-top: 18px;
       border-top: 1px solid var(--gold-mid);
-      font-size: 0.7rem;
+      font-size: 0.64rem;
       letter-spacing: var(--tracking-caps-wide);
       text-transform: uppercase;
       color: var(--ink-dim);
@@ -320,7 +320,7 @@
     }
 
     .footer-left { display: inline-flex; align-items: center; gap: 10px; }
-    .footer-left .wm-dot { width: 4px; height: 4px; }
+    .footer-left .wm-dot { width: 3px; height: 3px; }
 
     .footer-link {
       color: var(--ink-dim);
