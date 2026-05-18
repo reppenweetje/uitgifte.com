@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Uitgifte.com | Digitale infrastructuur voor vastgoed- en gronduitgiftes</title>
-  <meta name="description" content="Uitgifte.com is de digitale infrastructuur voor transparante vastgoed- en gronduitgiftes — publicatie, documentdeling, Q&A, inschrijvingen, dashboards en procesdossiervorming in één Didam-proof omgeving.">
+  <meta name="description" content="Uitgifte.com is de digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Publicatie, documentdeling, Q&A, inschrijvingen, dashboards en procesdossiervorming in één Didam-proof omgeving.">
   <meta name="theme-color" content="#faf7ee">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Uitgifte.com — Didam-proof uitgiftes">
+  <meta property="og:title" content="Uitgifte.com · Didam-proof uitgiftes">
   <meta property="og:description" content="De digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Didam-proof opgebouwd en ingericht.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="nl_NL">
   <meta property="og:url" content="https://uitgifte.com">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Uitgifte.com — Didam-proof uitgiftes">
+  <meta name="twitter:title" content="Uitgifte.com · Didam-proof uitgiftes">
   <meta name="twitter:description" content="De digitale infrastructuur voor transparante vastgoed- en gronduitgiftes.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,16 +196,21 @@
       grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
       gap: 80px;
       align-items: center;
-      padding: 8px 0;
+      padding: 0;
     }
 
     .content {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 20px;
+      gap: 16px;
       max-width: 540px;
     }
+
+    /* Tighter gaps between related micro-elements */
+    .content > .disclaimer { margin-top: -6px; }
+    .content > .pillars-eye { margin-top: 2px; }
+    .content > .audience { margin-top: -4px; }
 
     /* Status row — coming soon + trust pills */
     .status-row {
@@ -283,8 +288,10 @@
       font-style: italic;
     }
 
-    /* Mini feature-strip — module shorthand */
-    .features {
+    /* Micro-strips (features, pillars-eye, audience) — shared base */
+    .features,
+    .pillars-eye,
+    .audience {
       margin: 0;
       padding: 0;
       list-style: none;
@@ -292,7 +299,6 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 6px 14px;
-      font-size: 0.6rem;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -300,14 +306,18 @@
       max-width: 48ch;
     }
 
-    .features li {
+    .features li,
+    .pillars-eye li,
+    .audience li {
       display: inline-flex;
       align-items: center;
       gap: 14px;
       white-space: nowrap;
     }
 
-    .features li:not(:last-child)::after {
+    .features li:not(:last-child)::after,
+    .pillars-eye li:not(:last-child)::after,
+    .audience li:not(:last-child)::after {
       content: '';
       display: inline-block;
       width: 3px;
@@ -316,6 +326,34 @@
       transform: rotate(45deg);
       opacity: 0.7;
       flex-shrink: 0;
+    }
+
+    .features { font-size: 0.6rem; }
+
+    /* Pillars eyebrow — smaller, above headline */
+    .pillars-eye {
+      font-size: 0.54rem;
+      letter-spacing: 0.22em;
+      gap: 6px 12px;
+    }
+    .pillars-eye li { gap: 12px; }
+
+    /* Audience strip — slightly larger, prefix Voor */
+    .audience { font-size: 0.62rem; }
+    .audience li.audience__prefix {
+      color: var(--gold);
+      letter-spacing: 0.22em;
+    }
+    .audience li.audience__prefix::after { display: none !important; }
+
+    /* Didam disclaimer micro-line */
+    .disclaimer {
+      margin: 0;
+      font-size: 0.7rem;
+      line-height: 1.5;
+      color: var(--ink-dim);
+      font-style: italic;
+      max-width: 38ch;
     }
 
     /* CTA */
@@ -470,13 +508,16 @@
 
     html.ready .r-1 { animation-delay: 80ms; }
     html.ready .r-2 { animation-delay: 220ms; }
-    html.ready .r-3 { animation-delay: 360ms; }
-    html.ready .r-4 { animation-delay: 500ms; }
-    html.ready .r-4b { animation-delay: 580ms; }
-    html.ready .r-5 { animation-delay: 660ms; }
-    html.ready .r-6 { animation-delay: 760ms; }
+    html.ready .r-2b { animation-delay: 280ms; }
+    html.ready .r-2c { animation-delay: 340ms; }
+    html.ready .r-3 { animation-delay: 400ms; }
+    html.ready .r-4 { animation-delay: 520ms; }
+    html.ready .r-4b { animation-delay: 600ms; }
+    html.ready .r-5 { animation-delay: 680ms; }
+    html.ready .r-5b { animation-delay: 740ms; }
+    html.ready .r-6 { animation-delay: 800ms; }
     html.ready .r-7 { animation-delay: 200ms; }
-    html.ready .r-8 { animation-delay: 880ms; }
+    html.ready .r-8 { animation-delay: 900ms; }
 
     /* ============ RESPONSIVE — TABLET / MOBILE ============ */
 
@@ -577,6 +618,17 @@
           </div>
         </div>
 
+        <p class="disclaimer reveal r-2b">
+          Ondersteunt het proces. Juridische toetsing blijft bij u.
+        </p>
+
+        <ul class="pillars-eye reveal r-2c" aria-label="Kernuitgangspunten">
+          <li>Procesborging</li>
+          <li>Transparantie</li>
+          <li>Gelijke informatie</li>
+          <li>Dossiervorming</li>
+        </ul>
+
         <h1 class="headline reveal r-3">
           Digitale infrastructuur voor transparante vastgoed- en gronduitgiftes<span class="period">.</span>
         </h1>
@@ -597,6 +649,13 @@
         <p class="support reveal r-5">
           Voor organisaties die uitgiftes zorgvuldig, meetbaar en professioneel willen organiseren.
         </p>
+
+        <ul class="audience reveal r-5b" aria-label="Doelgroep">
+          <li class="audience__prefix">Voor</li>
+          <li>Gemeenten</li>
+          <li>Ontwikkelingsmaatschappijen</li>
+          <li>Grondbedrijven</li>
+        </ul>
 
         <a class="cta reveal r-6" href="mailto:info@repp.nl?subject=Demo%20Uitgifte.com&amp;body=Beste%20REPP%2C%0A%0AIk%20wil%20graag%20een%20demo%20van%20Uitgifte.com%20inplannen.%0A%0AMet%20vriendelijke%20groet%2C%0A">
           <span>Boek een demo</span>
