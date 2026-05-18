@@ -138,12 +138,12 @@
       z-index: 1;
       min-height: 100vh;
       min-height: 100dvh;
-      max-width: 1240px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 26px 72px 22px;
+      padding: 28px 56px 22px;
       display: grid;
       grid-template-rows: auto 1fr auto;
-      gap: 20px;
+      gap: 24px;
     }
 
     /* ============ TOPBAR ============ */
@@ -193,24 +193,25 @@
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-      gap: 80px;
-      align-items: center;
-      padding: 0;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 56px;
+      align-items: start;
+      padding: 8px 0 0;
     }
 
     .content {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 16px;
-      max-width: 540px;
+      gap: 14px;
+      max-width: 640px;
     }
 
     /* Tighter gaps between related micro-elements */
-    .content > .disclaimer { margin-top: -6px; }
-    .content > .pillars-eye { margin-top: 2px; }
-    .content > .audience { margin-top: -4px; }
+    .content > .disclaimer { margin-top: -6px; max-width: 56ch; }
+    .content > .pillars-eye { margin-top: 4px; }
+    .content > .audience { margin-top: -2px; }
+    .content > .features { margin-top: -2px; }
 
     /* Status row — coming soon + trust pills */
     .status-row {
@@ -261,11 +262,11 @@
     .headline {
       margin: 0;
       font-weight: 300;
-      font-size: clamp(1.85rem, 4.1vw, 3.4rem);
-      line-height: 1.1;
-      letter-spacing: -0.018em;
+      font-size: clamp(1.7rem, 3.2vw, 2.7rem);
+      line-height: 1.12;
+      letter-spacing: -0.016em;
       color: var(--ink);
-      max-width: 18ch;
+      max-width: 22ch;
     }
 
     .headline .period { color: var(--gold); }
@@ -303,7 +304,7 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--ink-dim);
-      max-width: 48ch;
+      width: 100%;
     }
 
     .features li,
@@ -398,8 +399,9 @@
       position: relative;
       aspect-ratio: 6 / 5;
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
       justify-self: end;
+      margin-top: 12px;
     }
 
     .visual svg {
@@ -653,8 +655,9 @@
         <ul class="audience reveal r-5b" aria-label="Doelgroep">
           <li class="audience__prefix">Voor</li>
           <li>Gemeenten</li>
-          <li>Ontwikkelingsmaatschappijen</li>
+          <li>Ontwikkelaars</li>
           <li>Grondbedrijven</li>
+          <li>Corporaties</li>
         </ul>
 
         <a class="cta reveal r-6" href="mailto:info@repp.nl?subject=Demo%20Uitgifte.com&amp;body=Beste%20REPP%2C%0A%0AIk%20wil%20graag%20een%20demo%20van%20Uitgifte.com%20inplannen.%0A%0AMet%20vriendelijke%20groet%2C%0A">
