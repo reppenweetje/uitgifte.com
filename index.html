@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Uitgifte.com | Digitale infrastructuur voor vastgoed- en gronduitgiftes</title>
-  <meta name="description" content="Uitgifte.com is in ontwikkeling: één omgeving voor transparante vastgoed- en gronduitgiftes, met publicatie, documentdeling, Q&A, inschrijvingen, dashboards en procesdossiervorming.">
-  <meta name="theme-color" content="#f5f1e8">
+  <meta name="description" content="Uitgifte.com is de digitale infrastructuur voor transparante vastgoed- en gronduitgiftes — publicatie, documentdeling, Q&A, inschrijvingen, dashboards en procesdossiervorming in één Didam-proof omgeving.">
+  <meta name="theme-color" content="#faf7ee">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Uitgifte.com">
-  <meta property="og:description" content="Digitale infrastructuur voor transparante vastgoed- en gronduitgiftes.">
+  <meta property="og:title" content="Uitgifte.com — Didam-proof uitgiftes">
+  <meta property="og:description" content="De digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Didam-proof opgebouwd en ingericht.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="nl_NL">
+  <meta property="og:url" content="https://uitgifte.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Uitgifte.com — Didam-proof uitgiftes">
+  <meta name="twitter:description" content="De digitale infrastructuur voor transparante vastgoed- en gronduitgiftes.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,12 +115,19 @@
       flex-shrink: 0;
     }
 
-    .topbar-meta {
+    .topbar-contact {
       font-size: 0.66rem;
       letter-spacing: var(--tracking-caps-wide);
       text-transform: uppercase;
       color: var(--ink-dim);
       font-weight: 500;
+      transition: color 220ms var(--ease);
+    }
+
+    .topbar-contact:hover,
+    .topbar-contact:focus-visible {
+      color: var(--gold);
+      outline: none;
     }
 
     /* ============ HERO ============ */
@@ -428,7 +439,7 @@
 
     @media (max-width: 480px) {
       .frame { padding: 24px 20px 20px; }
-      .topbar-meta { display: none; }
+      .topbar-contact { display: none; }
       .status {
         white-space: normal;
         line-height: 1.45;
@@ -455,7 +466,7 @@
       <a class="wordmark reveal r-1" href="/" aria-label="Uitgifte.com">
         <span>Uitgifte</span><span class="wm-dot" aria-hidden="true"></span><span>com</span>
       </a>
-      <span class="topbar-meta reveal r-1" aria-hidden="true">2026 — in ontwikkeling</span>
+      <a class="topbar-contact reveal r-1" href="mailto:info@repp.nl">info@repp.nl</a>
     </header>
 
     <!-- HERO -->
@@ -463,10 +474,6 @@
 
       <div class="content">
         <div class="status-row reveal r-2">
-          <div class="status" role="status">
-            <span class="pulse-dot" aria-hidden="true"></span>
-            <span>Coming soon</span>
-          </div>
           <div class="status" title="Opgebouwd en ingericht volgens het Didam-arrest (HR 26 november 2021)">
             <svg class="check-icon" viewBox="0 0 12 12" aria-hidden="true">
               <path d="M2.5 6.5 L5 9 L9.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -480,15 +487,15 @@
         </h1>
 
         <p class="sub reveal r-4">
-          Uitgifte.com is in ontwikkeling: één omgeving voor publicatie, documentdeling, Q&amp;A, inschrijvingen, dashboards en procesdossiervorming.
+          Uitgifte.com biedt één digitale omgeving voor publicatie, documentdeling, Q&amp;A, inschrijvingen, dashboards en procesdossiervorming.
         </p>
 
         <p class="support reveal r-5">
           Voor organisaties die uitgiftes zorgvuldig, meetbaar en professioneel willen organiseren.
         </p>
 
-        <a class="cta reveal r-6" href="https://repp.nl" target="_blank" rel="noopener noreferrer">
-          <span>Bezoek repp.nl</span>
+        <a class="cta reveal r-6" href="mailto:info@repp.nl?subject=Demo%20Uitgifte.com&amp;body=Beste%20REPP%2C%0A%0AIk%20wil%20graag%20een%20demo%20van%20Uitgifte.com%20inplannen.%0A%0AMet%20vriendelijke%20groet%2C%0A">
+          <span>Boek een demo</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
       </div>
