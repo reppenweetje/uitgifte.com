@@ -1,0 +1,9 @@
+# Uitgifte.com — robots.txt
+User-agent: *
+Allow: /
+
+# Block build scripts from indexing (not that they should be served, but just in case)
+Disallow: /build-og.py
+Disallow: /build-touch-icon.py
+
+Sitemap: https://uitgifte.com/sitemap.xml

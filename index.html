@@ -4,20 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Uitgifte.com | Digitale infrastructuur voor vastgoed- en gronduitgiftes</title>
-  <meta name="description" content="Uitgifte.com is de digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Publicatie, documentdeling, Q&A, inschrijvingen, dashboards en procesdossiervorming in één Didam-proof omgeving.">
+  <meta name="description" content="Digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Publicatie, dataroom, Q&A, inschrijvingen en dossier. Didam-proof opgebouwd & ingericht.">
+  <meta name="author" content="REPP">
   <meta name="theme-color" content="#faf7ee">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://uitgifte.com/">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Uitgifte.com · Didam-proof uitgiftes">
   <meta property="og:description" content="De digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Didam-proof opgebouwd en ingericht.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="nl_NL">
-  <meta property="og:url" content="https://uitgifte.com">
+  <meta property="og:url" content="https://uitgifte.com/">
+  <meta property="og:site_name" content="Uitgifte.com">
+  <meta property="og:image" content="https://uitgifte.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Uitgifte.com · digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Didam-proof opgebouwd & ingericht.">
+
+  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Uitgifte.com · Didam-proof uitgiftes">
   <meta name="twitter:description" content="De digitale infrastructuur voor transparante vastgoed- en gronduitgiftes.">
+  <meta name="twitter:image" content="https://uitgifte.com/og-image.png">
+  <meta name="twitter:image:alt" content="Uitgifte.com · Didam-proof digitale uitgifte-infrastructuur">
+
+  <!-- Icons -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <!-- Performance hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://plausible.io" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap">
 
   <!-- Privacy-friendly analytics by Plausible -->
@@ -38,26 +59,33 @@
         "name": "REPP",
         "url": "https://repp.nl",
         "email": "info@repp.nl",
-        "areaServed": { "@type": "Country", "name": "Netherlands" }
+        "areaServed": { "@type": "Country", "name": "Netherlands" },
+        "knowsAbout": [
+          "Vastgoeduitgiftes",
+          "Gronduitgiftes",
+          "Gebiedsontwikkeling",
+          "Didam-arrest"
+        ]
       },
       {
         "@type": "WebSite",
         "@id": "https://uitgifte.com/#website",
-        "url": "https://uitgifte.com",
+        "url": "https://uitgifte.com/",
         "name": "Uitgifte.com",
         "inLanguage": "nl-NL",
         "publisher": { "@id": "https://repp.nl/#org" }
       },
       {
         "@type": "SoftwareApplication",
+        "@id": "https://uitgifte.com/#software",
         "name": "Uitgifte.com",
         "alternateName": "REPP Uitgiftedesk",
         "description": "Digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Eén omgeving voor publicatie, documentdeling, Q&A, inschrijvingen, dashboards en procesdossiervorming. Didam-proof opgebouwd en ingericht.",
         "applicationCategory": "BusinessApplication",
         "applicationSubCategory": "PropTech",
         "operatingSystem": "Web",
-        "url": "https://uitgifte.com",
-        "image": "https://uitgifte.com/favicon.svg",
+        "url": "https://uitgifte.com/",
+        "image": "https://uitgifte.com/og-image.png",
         "provider": { "@id": "https://repp.nl/#org" },
         "audience": {
           "@type": "BusinessAudience",
@@ -73,7 +101,13 @@
           "Procesborging & dossiervorming",
           "Optionele beoordelingsmodule"
         ],
-        "keywords": "Didam-arrest, Didam-conform, vastgoeduitgiftes, gronduitgiftes, gebiedsontwikkeling, tenders, gemeentelijke uitgifte, transparante uitgifte"
+        "keywords": "Didam-arrest, Didam-conform, vastgoeduitgiftes, gronduitgiftes, gebiedsontwikkeling, tenders, gemeentelijke uitgifte, transparante uitgifte, proptech, dataroom, inschrijfmodule",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "EUR",
+          "url": "mailto:info@repp.nl"
+        }
       }
     ]
   }
