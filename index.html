@@ -560,7 +560,7 @@
       .visual {
         max-width: 100%;
         justify-self: stretch;
-        aspect-ratio: 8 / 5;
+        aspect-ratio: 6 / 5;
         order: 2;
       }
 
@@ -582,6 +582,34 @@
         line-height: 1.45;
         padding: 7px 14px;
       }
+
+      /* Compress pillars eyebrow on small screens — accept clean 2-line wrap */
+      .pillars-eye {
+        font-size: 0.5rem;
+        letter-spacing: 0.18em;
+        gap: 5px 10px;
+        line-height: 1.5;
+      }
+      .pillars-eye li { gap: 10px; }
+
+      /* Audience: drop "Voor" prefix, tighten spacing — 4 items wrap cleaner */
+      .audience li.audience__prefix { display: none; }
+      .audience {
+        font-size: 0.58rem;
+        letter-spacing: 0.16em;
+        gap: 5px 10px;
+        line-height: 1.5;
+      }
+      .audience li { gap: 10px; }
+
+      /* Visual: taller, more prominent stand-alone block on mobile */
+      .visual {
+        aspect-ratio: 5 / 4;
+        max-width: 100%;
+      }
+
+      /* Slightly tighter hero gap when stacked */
+      .hero { gap: 36px; }
     }
 
     /* ============ REDUCED MOTION ============ */
