@@ -19,6 +19,65 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap">
+
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-Gej_S12Vyc2LCTrqznnQy.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+
+  <!-- Structured data for SEO and AI-discovery -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://repp.nl/#org",
+        "name": "REPP",
+        "url": "https://repp.nl",
+        "email": "info@repp.nl",
+        "areaServed": { "@type": "Country", "name": "Netherlands" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://uitgifte.com/#website",
+        "url": "https://uitgifte.com",
+        "name": "Uitgifte.com",
+        "inLanguage": "nl-NL",
+        "publisher": { "@id": "https://repp.nl/#org" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Uitgifte.com",
+        "alternateName": "REPP Uitgiftedesk",
+        "description": "Digitale infrastructuur voor transparante vastgoed- en gronduitgiftes. Eén omgeving voor publicatie, documentdeling, Q&A, inschrijvingen, dashboards en procesdossiervorming. Didam-proof opgebouwd en ingericht.",
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "PropTech",
+        "operatingSystem": "Web",
+        "url": "https://uitgifte.com",
+        "image": "https://uitgifte.com/favicon.svg",
+        "provider": { "@id": "https://repp.nl/#org" },
+        "audience": {
+          "@type": "BusinessAudience",
+          "audienceType": "Gemeenten, ontwikkelingsmaatschappijen, grondbedrijven, woningcorporaties"
+        },
+        "featureList": [
+          "Projectpublicatie",
+          "Accountomgeving",
+          "Dataroom met documenttracking",
+          "FAQ met kennis-bot",
+          "Inschrijfmodule",
+          "Admin dashboard",
+          "Procesborging & dossiervorming",
+          "Optionele beoordelingsmodule"
+        ],
+        "keywords": "Didam-arrest, Didam-conform, vastgoeduitgiftes, gronduitgiftes, gebiedsontwikkeling, tenders, gemeentelijke uitgifte, transparante uitgifte"
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --paper: #faf7ee;
@@ -224,6 +283,41 @@
       font-style: italic;
     }
 
+    /* Mini feature-strip — module shorthand */
+    .features {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 14px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      max-width: 48ch;
+    }
+
+    .features li {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      white-space: nowrap;
+    }
+
+    .features li:not(:last-child)::after {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
     /* CTA */
     .cta {
       display: inline-flex;
@@ -378,8 +472,9 @@
     html.ready .r-2 { animation-delay: 220ms; }
     html.ready .r-3 { animation-delay: 360ms; }
     html.ready .r-4 { animation-delay: 500ms; }
-    html.ready .r-5 { animation-delay: 620ms; }
-    html.ready .r-6 { animation-delay: 740ms; }
+    html.ready .r-4b { animation-delay: 580ms; }
+    html.ready .r-5 { animation-delay: 660ms; }
+    html.ready .r-6 { animation-delay: 760ms; }
     html.ready .r-7 { animation-delay: 200ms; }
     html.ready .r-8 { animation-delay: 880ms; }
 
@@ -489,6 +584,15 @@
         <p class="sub reveal r-4">
           Uitgifte.com biedt één digitale omgeving voor publicatie, documentdeling, Q&amp;A, inschrijvingen, dashboards en procesdossiervorming.
         </p>
+
+        <ul class="features reveal r-4b" aria-label="Modules">
+          <li>Publicatie</li>
+          <li>Dataroom</li>
+          <li>Q&amp;A</li>
+          <li>Inschrijvingen</li>
+          <li>Dashboards</li>
+          <li>Dossier</li>
+        </ul>
 
         <p class="support reveal r-5">
           Voor organisaties die uitgiftes zorgvuldig, meetbaar en professioneel willen organiseren.
