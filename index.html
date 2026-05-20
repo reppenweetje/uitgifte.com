@@ -518,6 +518,52 @@
 
     .kavel-svg svg { display: block; width: 100%; height: auto; }
 
+    /* Scan-line: een neon-gekleurde verticale veeg die periodiek over de
+       kavel-grid beweegt. Geeft het abstract beeld een levend gevoel zonder
+       het rustige design te verstoren. Frequenter dan elke 7 sec voelt te
+       druk; 7s ritme is gewogen. */
+    .kavel-scan {
+      animation: kavelScan 7s cubic-bezier(0.55, 0, 0.45, 1) infinite;
+      transform-origin: center;
+    }
+    @keyframes kavelScan {
+      0%   { transform: translateX(0); opacity: 0; }
+      8%   {                            opacity: 1; }
+      92%  {                            opacity: 1; }
+      100% { transform: translateX(420px); opacity: 0; }
+    }
+
+    /* Active kavel kreeg ook een lichte pulse zodat het oog er aandacht
+       aan geeft als de scan-line erlangs trekt. Subtiel. */
+    .kavel-active {
+      animation: kavelPulse 7s ease-in-out infinite;
+    }
+    @keyframes kavelPulse {
+      0%, 40%   { fill-opacity: 0.10; }
+      55%       { fill-opacity: 0.22; }
+      70%, 100% { fill-opacity: 0.10; }
+    }
+
+    /* Scroll-progress: dunne neon-streep bovenaan die meegroeit met scroll.
+       Geeft direct gevoel "er is meer" en is een populaire moderne
+       afwerking. position:fixed + top:0 zodat het altijd zichtbaar blijft. */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--neon);
+      z-index: 100;
+      transition: width 80ms linear;
+      pointer-events: none;
+      box-shadow: 0 0 8px rgba(237, 255, 0, 0.4);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .kavel-scan, .kavel-active { animation: none; }
+      .scroll-progress { transition: none; }
+    }
+
     /* ============ MODULES ============ */
     .modules-section { padding: 100px 0; }
     @media (max-width: 640px) { .modules-section { padding: 64px 0; } }
@@ -778,6 +824,9 @@
 
   <a class="skip-link" href="#main">Naar de inhoud</a>
 
+  <!-- Scroll-progress indicator: dunne neon-streep bovenaan -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
   <!-- ============ HEADER ============ -->
   <header class="topbar">
     <div class="container topbar-inner">
@@ -946,25 +995,54 @@
     </div>
   </section>
 
-  <!-- ============ STATS BAND ============ -->
-  <section class="stats-band scroll-reveal" aria-label="Cijfers">
+  <!-- ============ KAVEL-GRID VISUAL (abstract, no fake case) ============ -->
+  <section class="showcase scroll-reveal" aria-label="Hoe een publicatie eruit ziet">
     <div class="container">
-      <div class="stats-grid">
+      <div class="showcase-card">
         <div>
-          <div class="stat-big">312<span class="accent-dot" aria-hidden="true"></span></div>
-          <div class="stat-lbl-big">Gemeenten · NL</div>
+          <div class="eyebrow" style="color: var(--ink); opacity: 0.7;">Visueel · Publicatie</div>
+          <h2>Eén kavel, één publiek proces<span class="accent-dot" aria-hidden="true"></span></h2>
+          <p>Van aankondiging tot gunning. Alle stappen, documenten en beslismomenten op één plek. Vindbaar, vergelijkbaar, verantwoordbaar.</p>
         </div>
-        <div>
-          <div class="stat-big">2.4<span class="suffix">k</span><span class="accent-dot" aria-hidden="true"></span></div>
-          <div class="stat-lbl-big">Uitgiftes per jaar</div>
-        </div>
-        <div>
-          <div class="stat-big">47<span class="accent-dot" aria-hidden="true"></span></div>
-          <div class="stat-lbl-big">Dossiers in beheer</div>
-        </div>
-        <div>
-          <div class="stat-big">20<span class="suffix">min</span><span class="accent-dot" aria-hidden="true"></span></div>
-          <div class="stat-lbl-big">Aankondiging live</div>
+        <div class="kavel-svg" aria-hidden="true">
+          <svg viewBox="0 0 480 320" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#EDFF00" stop-opacity="0"/>
+                <stop offset="50%" stop-color="#EDFF00" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#EDFF00" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke="#0D1B2A" stroke-width="1" opacity="0.35">
+              <rect x="20" y="20" width="440" height="280"/>
+              <line x1="20"  y1="110" x2="460" y2="110"/>
+              <line x1="20"  y1="210" x2="460" y2="210"/>
+              <line x1="160" y1="20"  x2="160" y2="300"/>
+              <line x1="320" y1="20"  x2="320" y2="300"/>
+            </g>
+            <g fill="none" stroke="#0D1B2A" stroke-width="1" stroke-dasharray="4 4" opacity="0.45">
+              <line x1="380" y1="20" x2="380" y2="300"/>
+            </g>
+            <rect class="kavel-active" x="162" y="112" width="156" height="96" fill="#0D1B2A" fill-opacity="0.10" stroke="#0D1B2A" stroke-width="1.25"/>
+            <g fill="#0D1B2A" opacity="0.45" font-family="Geist Mono, monospace" font-size="8" letter-spacing="1">
+              <text x="34"  y="50">K.01</text>
+              <text x="174" y="50">K.02</text>
+              <text x="334" y="50">K.03</text>
+              <text x="174" y="138">K.04</text>
+              <text x="334" y="138">K.05</text>
+              <text x="34"  y="138">K.06</text>
+              <text x="34"  y="238">K.07</text>
+              <text x="174" y="238">K.08</text>
+              <text x="334" y="238">K.09</text>
+            </g>
+            <g stroke="#0D1B2A" stroke-width="0.75" opacity="0.6">
+              <line x1="20" y1="312" x2="80" y2="312"/>
+              <line x1="20" y1="308" x2="20" y2="316"/>
+              <line x1="80" y1="308" x2="80" y2="316"/>
+            </g>
+            <text x="86" y="316" font-family="Geist Mono, monospace" font-size="8" fill="#0D1B2A" opacity="0.6" letter-spacing="1">SCHAAL</text>
+            <rect class="kavel-scan" x="20" y="20" width="20" height="280" fill="url(#scanGradient)"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -1055,6 +1133,29 @@
         document.documentElement.classList.add('ready');
       });
     });
+
+    // Scroll-progress indicator: dunne neon-streep bovenaan groeit mee met
+    // scroll-positie. Gebruik rAF voor smooth + ticking-guard om event-spam
+    // te voorkomen. Geen state-changes als reduced-motion aan staat.
+    (function () {
+      var bar = document.getElementById('scrollProgress');
+      if (!bar) return;
+      var ticking = false;
+      function update() {
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - doc.clientHeight;
+        var pct = max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0;
+        bar.style.width = pct + '%';
+        ticking = false;
+      }
+      update();
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      }, { passive: true });
+      window.addEventListener('resize', update);
+    })();
 
     // Scroll-reveal: sections fade + slide-up als ze in view komen.
     // Eén keer per sectie, daarna unobserve voor performance.
