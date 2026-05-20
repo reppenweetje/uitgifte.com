@@ -112,6 +112,75 @@
           "priceCurrency": "EUR",
           "url": "mailto:info@repp.nl"
         }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://uitgifte.com/#service",
+        "name": "Didam-proof vastgoeduitgifte",
+        "serviceType": "Digitale infrastructuur voor gronduitgifte",
+        "provider": { "@id": "https://repp.nl/#org" },
+        "areaServed": { "@type": "Country", "name": "Netherlands" },
+        "audience": {
+          "@type": "BusinessAudience",
+          "audienceType": "Gemeenten en publiek-vastgoedhouders"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Modules",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Publicatie", "description": "Marktconforme aankondiging met vindbare projectpagina." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dataroom", "description": "Versiegecontroleerde documenten met lees-tracking." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Q&A", "description": "Vragen anoniem, antwoorden openbaar." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Inschrijvingen", "description": "Gestructureerde inzendingen met validatie." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dossier", "description": "Audit-trail en bewijslast voor toezicht of bezwaar." } }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://uitgifte.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Wat is een Didam-proof uitgifte?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Een uitgifte waarbij de gemeente vooraf publiek aankondigt dat zij grond verkoopt, objectieve selectiecriteria publiceert, alle gegadigden gelijke informatie geeft en het voornemen tot gunning publiek aankondigt met bezwaartermijn. Dit volgt uit het Didam-arrest van de Hoge Raad (ECLI:NL:HR:2021:1778)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Voor wie is Uitgifte.com bedoeld?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Gemeenten, ontwikkelingsmaatschappijen, grondbedrijven en woningcorporaties die kavels of vastgoed-posities transparant en mededingings-open willen uitgeven."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Welke modules bevat Uitgifte.com?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vijf modules in één omgeving: Publicatie (marktconforme aankondiging), Dataroom (versiegecontroleerde documenten), Q&A (anonieme vragen met openbare antwoorden), Inschrijvingen (gestructureerde inzendingen) en Dossier (procesdossier met audit-trail)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hoe snel staat een aankondiging live?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Binnen 20 minuten vanaf het invoeren van de projectgegevens tot een publiek vindbare aankondigingspagina."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wie heeft Uitgifte.com gebouwd?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Uitgifte.com is een initiatief van REPP (Real Estate Performance Partner), een Nederlandse studio die digitale infrastructuur bouwt voor de vastgoedsector."
+            }
+          }
+        ]
       }
     ]
   }
@@ -149,9 +218,58 @@
       text-rendering: optimizeLegibility;
     }
 
-    body { min-height: 100vh; min-height: 100dvh; overflow-x: hidden; }
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtiel grid-pattern op de achtergrond (kavel-mark echoing). Geen
+       repeat-pattern omdat dat ruis geeft op high-res schermen; in plaats
+       daarvan dunne SVG-lijnen via radial-gradient voor warmte. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(13, 27, 42, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(13, 27, 42, 0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);
+    }
+
+    body > * { position: relative; z-index: 1; }
 
     a { color: inherit; text-decoration: none; }
+
+    /* Accessibility: skip-link */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background: var(--ink);
+      color: var(--bone);
+      padding: 12px 18px;
+      border: 2px solid var(--neon);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      z-index: 100;
+      transition: top 180ms var(--ease);
+    }
+    .skip-link:focus { top: 12px; outline: none; }
+
+    /* Consistent focus-ring across interactives */
+    a:focus-visible, button:focus-visible, .pill:focus-visible {
+      outline: 2px solid var(--neon);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
 
     ::selection { background: var(--neon); color: var(--ink); }
 
@@ -256,11 +374,24 @@
       background: var(--neon);
       border-color: var(--ink);
       color: var(--ink);
+      position: relative;
+      box-shadow: 0 0 0 0 rgba(237, 255, 0, 0);
     }
     .pill--primary:hover, .pill--primary:focus-visible {
       background: var(--ink);
       color: var(--neon);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -8px rgba(237, 255, 0, 0.65), 0 2px 8px -2px rgba(13, 27, 42, 0.2);
+    }
+    .pill--primary:active { transform: translateY(0); }
+
+    /* Subtle pulse on primary CTA when not interacted with */
+    @keyframes neon-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(237, 255, 0, 0); }
+      50% { box-shadow: 0 4px 16px -4px rgba(237, 255, 0, 0.35); }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .pill--primary.pill--attention { animation: neon-pulse 3.4s ease-in-out infinite; }
     }
 
     /* ============ HERO ============ */
@@ -410,9 +541,25 @@
     @media (min-width: 760px) {
       .modules-grid { grid-template-columns: 1fr 1fr; gap: 48px 64px; }
     }
+    .module-item { transition: transform 220ms var(--ease); }
+    .module-item:hover .module-num { color: var(--ink); }
     .module-item .module-head { display: flex; align-items: baseline; gap: 16px; }
-    .module-item .module-num { font-family: var(--mono); font-size: 14px; color: var(--muted); }
-    .module-item .module-name { margin: 0; font-weight: 400; letter-spacing: -0.035em; line-height: 0.98; font-size: clamp(26px, 3vw, 32px); }
+    .module-item .module-num { font-family: var(--mono); font-size: 14px; color: var(--muted); transition: color 220ms var(--ease); }
+    .module-item .module-name { margin: 0; font-weight: 400; letter-spacing: -0.035em; line-height: 0.98; font-size: clamp(26px, 3vw, 32px); position: relative; }
+    .module-item .module-name::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 50%;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transform: translateY(-50%);
+      transition: width 280ms var(--ease);
+    }
+    @media (min-width: 760px) {
+      .module-item:hover .module-name::before { width: 16px; }
+    }
     .module-item .module-desc { margin: 16px 0 0; font-size: 15px; line-height: 1.65; color: var(--muted); max-width: 44ch; }
 
     .dossier-tile { background: var(--sky); padding: 40px; grid-column: 1 / -1; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
@@ -516,9 +663,27 @@
     .contact-card {
       padding: 36px;
       border: 1px solid rgba(244,241,232,0.25);
-      transition: background 220ms var(--ease), border-color 220ms var(--ease);
+      position: relative;
+      transition: background 280ms var(--ease), border-color 280ms var(--ease), transform 220ms var(--ease);
     }
-    .contact-card:hover, .contact-card:focus-visible { background: rgba(244,241,232,0.04); border-color: rgba(244,241,232,0.55); outline: none; }
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(237, 255, 0, 0.07), transparent 40%);
+      opacity: 0;
+      transition: opacity 320ms var(--ease);
+    }
+    .contact-card:hover, .contact-card:focus-visible {
+      background: rgba(244,241,232,0.04);
+      border-color: rgba(244,241,232,0.55);
+      transform: translateY(-2px);
+      outline: none;
+    }
+    .contact-card:hover::after, .contact-card:focus-visible::after { opacity: 1; }
+    .contact-card .arr-text { transition: transform 220ms var(--ease); display: inline-block; }
+    .contact-card:hover .arr-text, .contact-card:focus-visible .arr-text { transform: translateX(4px); }
     .contact-card .num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--neon); }
     .contact-card .title { margin: 18px 0 0; font-weight: 400; letter-spacing: -0.035em; line-height: 1.05; font-size: clamp(24px, 2.6vw, 30px); }
     .contact-card .title .arr-text { color: var(--neon); }
@@ -543,15 +708,75 @@
     html.ready .r-5 { animation-delay: 600ms; }
     html.ready .r-6 { animation-delay: 720ms; }
 
+    /* Section scroll-reveal: triggered via IntersectionObserver in JS.
+       Initial state hidden, .in-view klasse triggert fade + slide. */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 720ms var(--ease), transform 720ms var(--ease);
+      will-change: opacity, transform;
+    }
+    .scroll-reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* ============ MOBILE TAP-TARGETS + RESPONSIVE FINE-TUNING ============ */
+    @media (max-width: 640px) {
+      /* WCAG: tap targets minimaal 44x44 */
+      .pill, .nav-link, .contact-card { min-height: 44px; }
+      .pill { padding: 14px 22px; }
+      /* Hero CTA op mobile full-width voor maximaal tikgemak */
+      .hero-cta-row .pill--primary { width: 100%; justify-content: space-between; padding: 16px 24px; }
+      /* Why-block iets compacter op smal scherm */
+      .why { padding: 20px 22px; margin-top: 36px; }
+      .why-list li { font-size: 14.5px; }
+      /* Dossier-tile op mobile compacter */
+      .dossier-tile { padding: 28px 22px; }
+      .dossier-row { grid-template-columns: 56px 1fr 60px; gap: 10px; font-size: 12px; }
+      /* Stats band mobile: 2x2 grid is al ok, font kleiner */
+      .stat-big { font-size: clamp(36px, 12vw, 56px); }
+      /* Contact cards full-width met aangepaste padding */
+      .contact-card { padding: 28px 22px; }
+      /* Modules-cta-strip stacking */
+      .modules-cta-strip { padding: 24px 22px; gap: 16px; }
+      .modules-cta-strip .pill--primary { width: 100%; justify-content: space-between; }
+      /* Nav-bar hoogte iets kleiner op mobile */
+      .topbar-inner { height: 64px; }
+    }
+
+    /* Tablet: lichte tuning tussen mobile en desktop */
+    @media (min-width: 641px) and (max-width: 1023px) {
+      .hero { padding: 80px 0 64px; }
+      .modules-grid { gap: 36px 48px; }
+    }
+
+    /* Large screens: cap container + accent breathing room */
+    @media (min-width: 1440px) {
+      .container { padding: 0 56px; }
+    }
+
+    /* Print stylesheet: clean PDF export */
+    @media print {
+      body::before, .topbar, .modules-cta-strip, .pill { display: none !important; }
+      body { background: white; color: black; }
+      .container { max-width: 100%; padding: 0; }
+      section { page-break-inside: avoid; }
+      a::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #444; }
+      a[href^="#"]::after, a[href^="/"]::after { content: ""; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .reveal { opacity: 1; transform: none; }
+      .reveal, .scroll-reveal { opacity: 1; transform: none; }
       html.ready .reveal { animation: none; }
-      .pill, .nav-link, .contact-card { transition: none; }
+      .scroll-reveal { transition: none; }
+      .pill, .nav-link, .contact-card, .module-item, .arr, .arr-text { transition: none !important; animation: none !important; }
+      .pill--primary { box-shadow: none !important; }
+      .pill--primary.pill--attention { animation: none !important; }
     }
   </style>
 </head>
 <body>
+
+  <a class="skip-link" href="#main">Naar de inhoud</a>
 
   <!-- ============ HEADER ============ -->
   <header class="topbar">
@@ -575,6 +800,8 @@
       </div>
     </div>
   </header>
+
+  <main id="main">
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
@@ -605,7 +832,7 @@
       </aside>
 
       <div class="hero-cta-row reveal r-5">
-        <a class="pill pill--primary" href="https://uitgifte.clp.repp.nl/?chat=1" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'hero'}})">
+        <a class="pill pill--primary pill--attention" href="https://uitgifte.clp.repp.nl/?chat=1" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'hero'}})">
           <span>Start de chat</span>
           <span class="arr" aria-hidden="true"></span>
         </a>
@@ -626,7 +853,7 @@
   </section>
 
   <!-- ============ MODULES ============ -->
-  <section id="modules" class="modules-section" aria-labelledby="modules-title">
+  <section id="modules" class="modules-section scroll-reveal" aria-labelledby="modules-title">
     <div class="container">
       <div class="eyebrow">Modules · 5</div>
       <h2 id="modules-title">Eén omgeving,<br>vijf werkstromen<span class="accent-dot" aria-hidden="true"></span></h2>
@@ -701,7 +928,7 @@
   </section>
 
   <!-- ============ TESTIMONIAL ============ -->
-  <section id="praktijk" class="testimonial-section" aria-label="Klantenervaring">
+  <section id="praktijk" class="testimonial-section scroll-reveal" aria-label="Klantenervaring">
     <div class="container">
       <div class="eyebrow-row">
         <div class="eyebrow">Praktijk · ROM-D, Dordrecht</div>
@@ -720,7 +947,7 @@
   </section>
 
   <!-- ============ STATS BAND ============ -->
-  <section class="stats-band" aria-label="Cijfers">
+  <section class="stats-band scroll-reveal" aria-label="Cijfers">
     <div class="container">
       <div class="stats-grid">
         <div>
@@ -744,7 +971,7 @@
   </section>
 
   <!-- ============ DIDAM EXPLAINER ============ -->
-  <section id="didam" class="didam" aria-labelledby="didam-title">
+  <section id="didam" class="didam scroll-reveal" aria-labelledby="didam-title">
     <div class="container didam-grid">
       <div>
         <div class="eyebrow">Het arrest · ECLI:NL:HR:2021:1778</div>
@@ -782,7 +1009,7 @@
   </section>
 
   <!-- ============ CONTACT (dark) ============ -->
-  <section id="contact" class="contact-section" aria-labelledby="contact-title">
+  <section id="contact" class="contact-section scroll-reveal" aria-labelledby="contact-title">
     <div class="container">
       <div class="eyebrow">Contact</div>
       <h2 id="contact-title">Liever even sparren met REPP<span class="km km-neon" aria-hidden="true"></span></h2>
@@ -805,6 +1032,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container footer-inner">
@@ -826,6 +1055,41 @@
         document.documentElement.classList.add('ready');
       });
     });
+
+    // Scroll-reveal: sections fade + slide-up als ze in view komen.
+    // Eén keer per sectie, daarna unobserve voor performance.
+    (function () {
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: zonder IO maken we alles meteen zichtbaar
+        document.querySelectorAll('.scroll-reveal').forEach(function (el) { el.classList.add('in-view'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+      document.querySelectorAll('.scroll-reveal').forEach(function (el) { io.observe(el); });
+    })();
+
+    // Mouse-follow gradient op contact-cards (dark section). Update
+    // --mx/--my CSS-variables zodat het radial-gradient highlight
+    // de cursor volgt. Touch-devices: gradient blijft op default 50/50.
+    (function () {
+      if (window.matchMedia('(hover: none)').matches) return;
+      document.querySelectorAll('.contact-card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var rect = card.getBoundingClientRect();
+          var mx = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+          var my = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+          card.style.setProperty('--mx', mx + '%');
+          card.style.setProperty('--my', my + '%');
+        });
+      });
+    })();
   </script>
 
   <script>
