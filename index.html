@@ -658,11 +658,13 @@
       font-style: normal;
     }
 
-    .testimonial .attribution::before {
-      content: '';
-      width: 28px;
-      height: 1px;
-      background: var(--gold);
+    .testimonial .attribution__avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--gold);
+      background: var(--paper-soft);
       flex-shrink: 0;
     }
 
@@ -1241,6 +1243,7 @@
       <blockquote class="quote-body">
         <p>De Didam-uitspraak vraagt om uitgiftes die transparant én werkbaar zijn. Met de methode van Uitgifte.com hebben we voor onze maritieme kavels de hele relevante markt kunnen bereiken en de keuze objectief kunnen onderbouwen, zonder dat we als gemeente de regie uit handen geven. Een aanpak die ik andere gemeentes zonder meer kan aanraden.</p>
         <footer class="attribution">
+          <img class="attribution__avatar" src="otto-verschoor.jpg" alt="" width="52" height="52" loading="lazy" decoding="async" />
           <cite>
             <span class="attr-name">Otto Verschoor</span>
             <span class="attr-org">ROM-D / Gemeente Dordrecht en Drechtsteden</span>
