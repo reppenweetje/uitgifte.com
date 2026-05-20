@@ -1320,5 +1320,72 @@
       });
     });
   </script>
+
+  <script>
+    // Engagement-tracking: scroll-depth milestones + section-view events.
+    // Beide one-fire-per-visit. Plausible-events:
+    //   scroll-depth { depth: "25"|"50"|"75"|"100" }
+    //   section-view { section: "testimonial"|"modules"|"contact" }
+    (function () {
+      if (typeof window.plausible !== 'function' && !window.plausible) {
+        // Plausible kan nog laden (async script); we wachten via window.plausible queue
+      }
+      function track(name, props) {
+        if (typeof window.plausible === 'function') window.plausible(name, { props: props });
+      }
+
+      // ── Scroll-depth ──────────────────────────────────────────────────
+      var depthMilestones = [25, 50, 75, 100];
+      var depthFired = {};
+      function checkDepth() {
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - doc.clientHeight;
+        if (max <= 0) return;
+        var pct = Math.min(100, Math.round((window.scrollY / max) * 100));
+        for (var i = 0; i < depthMilestones.length; i++) {
+          var m = depthMilestones[i];
+          if (pct >= m && !depthFired[m]) {
+            depthFired[m] = true;
+            track('scroll-depth', { depth: String(m) });
+          }
+        }
+      }
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { checkDepth(); ticking = false; });
+      }, { passive: true });
+      // Initial check zodat single-screen visitors ook 25% triggeren
+      setTimeout(checkDepth, 1500);
+
+      // ── Section-view (IntersectionObserver) ───────────────────────────
+      if ('IntersectionObserver' in window) {
+        var sections = [
+          { sel: '#testimonial', name: 'testimonial' },
+          { sel: '#modules',     name: 'modules' },
+          { sel: '#contact',     name: 'contact' }
+        ];
+        var seen = {};
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            for (var i = 0; i < sections.length; i++) {
+              if (e.target.matches(sections[i].sel) && !seen[sections[i].name]) {
+                seen[sections[i].name] = true;
+                track('section-view', { section: sections[i].name });
+                io.unobserve(e.target);
+                break;
+              }
+            }
+          });
+        }, { threshold: 0.5 });
+        sections.forEach(function (s) {
+          var el = document.querySelector(s.sel);
+          if (el) io.observe(el);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
