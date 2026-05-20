@@ -65,7 +65,14 @@
           "Gronduitgiftes",
           "Gebiedsontwikkeling",
           "Didam-arrest"
-        ]
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "info@repp.nl",
+          "availableLanguage": ["Dutch", "English"],
+          "areaServed": "NL"
+        }
       },
       {
         "@type": "WebSite",
@@ -132,6 +139,11 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px;
+    }
 
     html, body {
       margin: 0;
@@ -219,6 +231,45 @@
     .topbar-contact:focus-visible {
       color: var(--gold);
       outline: none;
+    }
+
+    .topbar-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .topbar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px 7px 16px;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: var(--tracking-caps);
+      text-transform: uppercase;
+      color: var(--ink);
+      background: transparent;
+      transition: background 240ms var(--ease), color 240ms var(--ease);
+    }
+
+    .topbar-cta:hover,
+    .topbar-cta:focus-visible {
+      background: var(--gold);
+      color: var(--paper);
+      outline: none;
+    }
+
+    .topbar-cta .arrow {
+      font-weight: 400;
+      transition: transform 240ms var(--ease);
+    }
+
+    .topbar-cta:hover .arrow,
+    .topbar-cta:focus-visible .arrow {
+      transform: translateX(3px);
     }
 
     /* ============ HERO ============ */
@@ -424,6 +475,45 @@
     .cta:hover .arrow,
     .cta:focus-visible .arrow {
       transform: translateX(5px);
+    }
+
+    /* Scroll hint — subtle "lees verder" pointer under hero CTA */
+    .scroll-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: var(--tracking-caps-wide);
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      transition: color 220ms var(--ease);
+    }
+
+    .scroll-hint:hover,
+    .scroll-hint:focus-visible {
+      color: var(--gold);
+      outline: none;
+    }
+
+    .scroll-hint__chevron {
+      display: inline-flex;
+      width: 18px;
+      height: 18px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold-mid);
+      border-radius: 50%;
+      color: var(--gold);
+      font-size: 0.75rem;
+      line-height: 1;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
     }
 
     /* ============ VISUAL — kavelgrid ============ */
@@ -688,6 +778,151 @@
       color: var(--ink-soft);
     }
 
+    /* Modules secondary CTA — chat trigger directly below the grid */
+    .modules-cta {
+      margin: 24px 0 0;
+      padding: 18px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--gold-mid);
+      background: var(--gold-soft);
+    }
+
+    .modules-cta__text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .modules-cta__eye {
+      margin: 0;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: var(--tracking-caps-wide);
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .modules-cta__line {
+      margin: 0;
+      font-size: 0.96rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .modules-cta .cta {
+      margin-top: 0;
+      flex-shrink: 0;
+    }
+
+    /* ============ CONTACT ============ */
+
+    .contact {
+      margin: 56px auto 32px;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .contact-head {
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 60ch;
+    }
+
+    .contact-eye {
+      margin: 0;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: var(--tracking-caps-wide);
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .contact-headline {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.4vw, 1.95rem);
+      font-weight: 300;
+      line-height: 1.18;
+      color: var(--ink);
+      letter-spacing: -0.012em;
+    }
+
+    .contact-headline .period { color: var(--gold); }
+
+    .contact-sub {
+      margin: 6px 0 0;
+      font-size: 0.94rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .contact-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--gold-mid);
+      border: 1px solid var(--gold-mid);
+    }
+
+    .contact-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 26px 56px 28px 26px;
+      background: var(--paper);
+      color: var(--ink);
+      transition: background 240ms var(--ease);
+    }
+
+    .contact-card:hover,
+    .contact-card:focus-visible {
+      background: var(--gold-soft);
+      outline: none;
+    }
+
+    .contact-card__eye {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: var(--tracking-caps-wide);
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .contact-card__title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+    }
+
+    .contact-card__desc {
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .contact-card__arrow {
+      position: absolute;
+      top: 26px;
+      right: 26px;
+      font-size: 1rem;
+      color: var(--gold);
+      transition: transform 240ms var(--ease);
+    }
+
+    .contact-card:hover .contact-card__arrow,
+    .contact-card:focus-visible .contact-card__arrow {
+      transform: translateX(4px);
+    }
+
     /* ============ STAGGER ANIMATION ============ */
 
     .reveal {
@@ -788,6 +1023,24 @@
       .modules-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+      .modules-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 22px 22px;
+      }
+      .modules-cta .cta {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .contact {
+        margin: 36px auto 24px;
+      }
+      .contact-actions {
+        grid-template-columns: 1fr;
+      }
+      .topbar-actions {
+        gap: 14px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -840,6 +1093,15 @@
       .modules-grid {
         grid-template-columns: 1fr;
       }
+      .topbar-cta {
+        font-size: 0.56rem;
+        padding: 6px 12px 6px 14px;
+        gap: 6px;
+      }
+      .topbar-cta .arrow { display: none; }
+      .scroll-hint {
+        font-size: 0.58rem;
+      }
     }
 
     /* ============ REDUCED MOTION ============ */
@@ -861,7 +1123,13 @@
       <a class="wordmark reveal r-1" href="/" aria-label="Uitgifte.com">
         <span>Uitgifte</span><span class="wm-dot" aria-hidden="true"></span><span>com</span>
       </a>
-      <a class="topbar-contact reveal r-1" href="mailto:info@repp.nl">info@repp.nl</a>
+      <div class="topbar-actions reveal r-1">
+        <a class="topbar-contact" href="mailto:info@repp.nl">info@repp.nl</a>
+        <a class="topbar-cta" href="https://uitgifte.clp.repp.nl" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'topbar'}})">
+          <span>Start de chat</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
     </header>
 
     <!-- HERO -->
@@ -900,9 +1168,14 @@
           <li>Corporaties</li>
         </ul>
 
-        <a class="cta reveal r-6" href="https://uitgifte.clp.repp.nl" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat')">
+        <a class="cta reveal r-6" href="https://uitgifte.clp.repp.nl" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'hero'}})">
           <span>Start de chat</span>
           <span class="arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a class="scroll-hint reveal r-6" href="#testimonial" aria-label="Scroll naar meer informatie">
+          <span class="scroll-hint__label">Of lees eerst verder</span>
+          <span class="scroll-hint__chevron" aria-hidden="true">↓</span>
         </a>
       </div>
 
@@ -963,7 +1236,7 @@
     </main>
 
     <!-- TESTIMONIAL -->
-    <section class="testimonial" aria-label="Klantenervaring">
+    <section class="testimonial" id="testimonial" aria-label="Klantenervaring">
       <span class="quote-mark" aria-hidden="true">&#8220;</span>
       <blockquote class="quote-body">
         <p>De Didam-uitspraak vraagt om uitgiftes die transparant én werkbaar zijn. Met de methode van Uitgifte.com hebben we voor onze maritieme kavels de hele relevante markt kunnen bereiken en de keuze objectief kunnen onderbouwen, zonder dat we als gemeente de regie uit handen geven. Een aanpak die ik andere gemeentes zonder meer kan aanraden.</p>
@@ -977,7 +1250,7 @@
     </section>
 
     <!-- MODULES -->
-    <section class="modules" aria-labelledby="modules-eye">
+    <section class="modules" id="modules" aria-labelledby="modules-eye">
       <header class="modules-head">
         <p class="modules-eye" id="modules-eye">Modules</p>
         <h2 class="modules-headline">Eén omgeving, vijf werkstromen<span class="period">.</span></h2>
@@ -1011,6 +1284,41 @@
           <p class="module-desc">Eén procesdossier: tijdlijn, beslismomenten, audit-trail en bewijslast voor toezicht of bezwaar.</p>
         </li>
       </ul>
+
+      <aside class="modules-cta" role="complementary" aria-label="Vervolgactie">
+        <div class="modules-cta__text">
+          <p class="modules-cta__eye">Toepassen</p>
+          <p class="modules-cta__line">Benieuwd hoe dit voor jouw gemeente kan werken?</p>
+        </div>
+        <a class="cta" href="https://uitgifte.clp.repp.nl" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'modules-foot'}})">
+          <span>Start de chat</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </aside>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact" aria-labelledby="contact-eye">
+      <header class="contact-head">
+        <p class="contact-eye" id="contact-eye">Direct contact</p>
+        <h2 class="contact-headline">Liever even sparren met REPP<span class="period">?</span></h2>
+        <p class="contact-sub">Plan een live demo op jouw kavels of project, of mail ons rechtstreeks. We denken graag mee over jouw situatie.</p>
+      </header>
+
+      <div class="contact-actions">
+        <a class="contact-card" href="mailto:info@repp.nl?subject=Demo%20Uitgifte.com&amp;body=Beste%20REPP%2C%0A%0AIk%20wil%20graag%20een%20demo%20van%20Uitgifte.com%20inplannen.%0A%0AMet%20vriendelijke%20groet%2C%0A" onclick="window.plausible &amp;&amp; window.plausible('cta:book-demo')">
+          <span class="contact-card__eye">Demo</span>
+          <span class="contact-card__title">Boek een demo</span>
+          <span class="contact-card__desc">Live walkthrough op jouw kavels of project, inclusief Didam-checklist.</span>
+          <span class="contact-card__arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="contact-card" href="mailto:info@repp.nl" onclick="window.plausible &amp;&amp; window.plausible('cta:direct-mail')">
+          <span class="contact-card__eye">E-mail</span>
+          <span class="contact-card__title">Stuur ons een mail</span>
+          <span class="contact-card__desc">Korte vraag of inhoudelijk gesprek. Reactie binnen één werkdag.</span>
+          <span class="contact-card__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
     </section>
 
     <!-- FOOTER -->
