@@ -395,8 +395,31 @@
     }
 
     /* ============ HERO ============ */
-    .hero { padding: 110px 0 80px; }
-    @media (max-width: 640px) { .hero { padding: 56px 0 48px; } }
+    .hero { padding: 96px 0 80px; }
+    @media (max-width: 640px) { .hero { padding: 48px 0 56px; } }
+
+    /* 2-koloms layout: tekst links, kavel-grid visual rechts.
+       Op mobile stacked, vanaf 960px naast elkaar. */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (min-width: 960px) {
+      .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 72px; }
+    }
+    .hero-content { min-width: 0; }
+    .hero-visual {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .hero-visual svg { display: block; width: 100%; height: auto; }
+    /* Op mobile bovenaan; op desktop rechts gepositioneerd in raster */
+    @media (max-width: 959px) {
+      .hero-visual { max-width: 420px; }
+    }
 
     .hero-eye { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; }
     .hero-eye .km { width: 9px; height: 9px; }
@@ -413,58 +436,21 @@
       font-weight: 400;
       letter-spacing: -0.035em;
       line-height: 0.98;
-      font-size: clamp(44px, 7vw, 96px);
-      max-width: 16ch;
+      font-size: clamp(40px, 5.8vw, 76px);
+      max-width: 15ch;
     }
     .hero-headline .accent-dot { display: inline-block; width: 0.22em; height: 0.22em; vertical-align: baseline; margin-left: 0.04em;
       background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%230D1B2A' stroke-width='14' stroke-linecap='square'><path d='M0,30 L0,0 L30,0'/><path d='M70,0 L100,0 L100,30'/><path d='M0,70 L0,100 L30,100'/><path d='M70,100 L100,100 L100,70'/></svg>") center/contain no-repeat;
     }
 
     .hero-lead {
-      margin: 36px 0 0;
-      font-size: clamp(18px, 1.6vw, 22px);
-      line-height: 1.45;
+      margin: 28px 0 0;
+      font-size: clamp(17px, 1.5vw, 20px);
+      line-height: 1.5;
       color: var(--muted);
-      max-width: 56ch;
+      max-width: 50ch;
       font-weight: 400;
       letter-spacing: -0.012em;
-    }
-
-    /* Why-block: tells visitor WHY they should start the chat */
-    .why {
-      margin: 44px 0 0;
-      padding: 24px 28px;
-      background: var(--bone);
-      border: 1px solid var(--ink);
-      max-width: 640px;
-    }
-    .why-eye {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .why-eye .km { width: 8px; height: 8px; }
-    .why-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-    .why-list li {
-      display: grid;
-      grid-template-columns: 30px 1fr;
-      gap: 12px;
-      align-items: baseline;
-      font-size: 15px;
-      line-height: 1.45;
-      color: var(--ink);
-    }
-    .why-list li .n {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.10em;
     }
 
     .hero-cta-row {
@@ -472,24 +458,35 @@
       display: flex; flex-wrap: wrap; align-items: center; gap: 22px;
     }
 
-    .hero-audience {
-      margin: 48px 0 0;
-      display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px;
+    /* CTA-meta: één-regel kort wat de bezoeker te wachten staat na de
+       klik. Vervangt het why-block dat de hero te vol maakte. */
+    .hero-cta-meta {
+      margin: 14px 0 0;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 56ch;
     }
-    .hero-audience .eyebrow { color: var(--muted); }
-    .hero-audience .sep { font-family: var(--mono); font-size: 13px; color: var(--muted); }
-    .hero-audience .item { font-family: var(--mono); font-size: 13px; color: var(--ink); }
 
-    /* Hero subregel: tweede paragraph onder hero-lead, kleinere font,
-       muted maar leesbaar. Geeft direct doelgroep-context na de lead. */
-    .hero-sub {
-      margin: 24px 0 0;
-      font-size: clamp(16px, 1.3vw, 18px);
-      line-height: 1.55;
+    /* Secundair scroll-pad onder CTA. Geen vetgedrukt, blijft rustig. */
+    .hero-scroll-link {
+      margin: 40px 0 0;
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
       color: var(--ink);
-      opacity: 0.7;
-      max-width: 60ch;
-      letter-spacing: -0.008em;
+      opacity: 0.6;
+      transition: opacity 220ms var(--ease), transform 220ms var(--ease);
+    }
+    .hero-scroll-link:hover, .hero-scroll-link:focus-visible {
+      opacity: 1;
+      transform: translateY(2px);
+      outline: none;
     }
 
     /* ============ VOOR WIE (use-cases) ============ */
@@ -509,34 +506,40 @@
       letter-spacing: -0.01em;
       max-width: 54ch;
     }
+    /* Voor-wie als chips: compacte mono-stijl pills met hover-fill.
+       Vervangt de lange verticale lijst — voelt direct kleiner en
+       suggereert dat de doelgroep breed is zonder te overweldigen. */
     .for-whom-list {
       margin: 0;
       padding: 0;
       list-style: none;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-      border-top: 1px solid var(--hair-strong);
-    }
-    @media (min-width: 760px) {
-      .for-whom-list { grid-template-columns: 1fr 1fr; column-gap: 64px; }
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .for-whom-list li {
-      display: grid;
-      grid-template-columns: 22px 1fr;
-      gap: 16px;
+      display: inline-flex;
       align-items: center;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--hair-strong);
-      font-size: clamp(16px, 1.3vw, 18px);
+      gap: 10px;
+      padding: 11px 16px;
+      border: 1px solid var(--hair-strong);
+      background: transparent;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.02em;
       color: var(--ink);
-      letter-spacing: -0.008em;
-      transition: padding-left 280ms var(--ease), color 220ms var(--ease);
+      transition: background 220ms var(--ease), color 220ms var(--ease), border-color 220ms var(--ease), transform 180ms var(--ease);
     }
     .for-whom-list li:hover {
-      padding-left: 8px;
+      background: var(--ink);
+      color: var(--bone);
+      border-color: var(--ink);
+      transform: translateY(-1px);
     }
-    .for-whom-list li .km { width: 10px; height: 10px; }
+    .for-whom-list li:hover .km {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23F4F1E8' stroke-width='14' stroke-linecap='square'><path d='M0,30 L0,0 L30,0'/><path d='M70,0 L100,0 L100,30'/><path d='M0,70 L0,100 L30,100'/><path d='M70,100 L100,100 L100,70'/></svg>");
+    }
+    .for-whom-list li .km { width: 9px; height: 9px; transition: background-image 220ms var(--ease); }
 
     /* ============ WAT LEVERT HET OP (benefits) ============ */
     .benefits { background: var(--ink); color: var(--bone); padding: 110px 0; }
@@ -547,12 +550,6 @@
       font-weight: 400; letter-spacing: -0.035em; line-height: 0.98;
       font-size: clamp(34px, 5vw, 64px);
       color: var(--bone);
-    }
-    .benefits-head h2 .accent-dot-neon {
-      width: 0.22em; height: 0.22em;
-      margin-left: 0.04em;
-      display: inline-block;
-      vertical-align: baseline;
     }
     .benefits-intro {
       margin: 24px 0 0;
@@ -903,9 +900,14 @@
       .pill { padding: 14px 22px; }
       /* Hero CTA op mobile full-width voor maximaal tikgemak */
       .hero-cta-row .pill--primary { width: 100%; justify-content: space-between; padding: 16px 24px; }
-      /* Why-block iets compacter op smal scherm */
-      .why { padding: 20px 22px; margin-top: 36px; }
-      .why-list li { font-size: 14.5px; }
+      /* Kavel-grid visual op kleine mobile verbergen om hero compact te houden.
+         Visual is puur decoratief (aria-hidden), dus geen semantisch verlies.
+         Vanaf tablet (641px+) komt 'ie weer terug. */
+      .hero-visual { display: none; }
+      /* Hero scroll-link minder ruimte op mobile */
+      .hero-scroll-link { margin-top: 28px; }
+      /* For-whom chips iets compacter op mobile */
+      .for-whom-list li { padding: 10px 14px; font-size: 12px; }
       /* Dossier-tile op mobile compacter */
       .dossier-tile { padding: 28px 22px; }
       .dossier-row { grid-template-columns: 56px 1fr 60px; gap: 10px; font-size: 12px; }
@@ -968,9 +970,7 @@
       <nav class="nav" aria-label="Hoofdmenu">
         <a href="#voor-wie" class="nav-link">Voor wie</a>
         <a href="#modules" class="nav-link">Modules</a>
-        <a href="#resultaat" class="nav-link">Resultaat</a>
         <a href="#praktijk" class="nav-link">Praktijk</a>
-        <a href="#didam" class="nav-link">Didam</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
       <div class="topbar-right">
@@ -985,46 +985,75 @@
 
   <main id="main">
 
-  <!-- ============ HERO ============ -->
+  <!-- ============ HERO (2-koloms: tekst + animated kavel-grid) ============ -->
   <section class="hero" id="hero">
-    <div class="container">
-      <div class="hero-eye reveal r-1">
-        <span class="km" aria-hidden="true"></span>
-        <span class="hero-eye-text">Didam-proof opgebouwd &amp; ingericht</span>
-      </div>
-
-      <h1 class="hero-headline reveal r-2">
-        Digitale infrastructuur voor transparante vastgoed- en gronduitgiftes<span class="accent-dot" aria-hidden="true"></span>
-      </h1>
-
-      <p class="hero-lead reveal r-3">
-        Uitgifte.com bundelt publicatie, documentdeling, Q&amp;A, inschrijvingen en dossieropbouw in één centrale omgeving. Zo verloopt elke uitgifte overzichtelijk, eerlijk en controleerbaar, met minder handwerk voor de organisatie en gelijke informatie voor iedere gegadigde.
-      </p>
-
-      <p class="hero-sub reveal r-3">
-        Ingericht voor gemeenten, ontwikkelaars, grondbedrijven en corporaties die vastgoed of grond zorgvuldig en professioneel willen uitgeven.
-      </p>
-
-      <aside class="why reveal r-4" id="why" aria-labelledby="why-title">
-        <div class="why-eye" id="why-title">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-eye reveal r-1">
           <span class="km" aria-hidden="true"></span>
-          <span>Wat je in de chat ontdekt. In ± 2 minuten.</span>
+          <span class="hero-eye-text">Didam-proof opgebouwd &amp; ingericht</span>
         </div>
-        <ul class="why-list">
-          <li><span class="n">01</span><span>Hoe Uitgifte.com voor jouw gemeente werkt. Modules, rollen, doorlooptijd.</span></li>
-          <li><span class="n">02</span><span>Een Didam-checklist toegepast op jouw eerstvolgende uitgifte</span></li>
-          <li><span class="n">03</span><span>Concreet: hoe ROM-D Dordrecht het deed bij 3,8 ha maritieme kavels</span></li>
-        </ul>
-      </aside>
 
-      <div class="hero-cta-row reveal r-5">
-        <a class="pill pill--primary pill--attention" href="https://uitgifte.clp.repp.nl/?chat=1" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'hero'}})">
-          <span>Start de chat</span>
-          <span class="arr" aria-hidden="true"></span>
-        </a>
-        <a class="nav-link" href="#modules" style="opacity: 0.7;">of lees eerst verder ↓</a>
+        <h1 class="hero-headline reveal r-2">
+          Digitale infrastructuur voor transparante vastgoed- en gronduitgiftes<span class="accent-dot" aria-hidden="true"></span>
+        </h1>
+
+        <p class="hero-lead reveal r-3">
+          Eén omgeving voor publicatie, dataroom, Q&amp;A, inschrijvingen en dossier. Overzichtelijk, eerlijk en controleerbaar voor iedere gegadigde.
+        </p>
+
+        <div class="hero-cta-row reveal r-4">
+          <a class="pill pill--primary pill--attention" href="https://uitgifte.clp.repp.nl/?chat=1" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'hero'}})">
+            <span>Start de chat</span>
+            <span class="arr" aria-hidden="true"></span>
+          </a>
+        </div>
+        <p class="hero-cta-meta reveal r-4">
+          In ± 2 minuten · walkthrough modules · Didam-checklist op jouw situatie · ROM-D case
+        </p>
+        <a href="#voor-wie" class="hero-scroll-link reveal r-5">Of lees verder ↓</a>
       </div>
 
+      <div class="hero-visual reveal r-3" aria-hidden="true">
+        <svg viewBox="0 0 480 320" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#EDFF00" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#EDFF00" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#EDFF00" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke="#0D1B2A" stroke-width="1" opacity="0.35">
+            <rect x="20" y="20" width="440" height="280"/>
+            <line x1="20"  y1="110" x2="460" y2="110"/>
+            <line x1="20"  y1="210" x2="460" y2="210"/>
+            <line x1="160" y1="20"  x2="160" y2="300"/>
+            <line x1="320" y1="20"  x2="320" y2="300"/>
+          </g>
+          <g fill="none" stroke="#0D1B2A" stroke-width="1" stroke-dasharray="4 4" opacity="0.45">
+            <line x1="380" y1="20" x2="380" y2="300"/>
+          </g>
+          <rect class="kavel-active" x="162" y="112" width="156" height="96" fill="#0D1B2A" fill-opacity="0.10" stroke="#0D1B2A" stroke-width="1.25"/>
+          <g fill="#0D1B2A" opacity="0.45" font-family="Geist Mono, monospace" font-size="8" letter-spacing="1">
+            <text x="34"  y="50">K.01</text>
+            <text x="174" y="50">K.02</text>
+            <text x="334" y="50">K.03</text>
+            <text x="174" y="138">K.04</text>
+            <text x="334" y="138">K.05</text>
+            <text x="34"  y="138">K.06</text>
+            <text x="34"  y="238">K.07</text>
+            <text x="174" y="238">K.08</text>
+            <text x="334" y="238">K.09</text>
+          </g>
+          <g stroke="#0D1B2A" stroke-width="0.75" opacity="0.6">
+            <line x1="20" y1="312" x2="80" y2="312"/>
+            <line x1="20" y1="308" x2="20" y2="316"/>
+            <line x1="80" y1="308" x2="80" y2="316"/>
+          </g>
+          <text x="86" y="316" font-family="Geist Mono, monospace" font-size="8" fill="#0D1B2A" opacity="0.6" letter-spacing="1">SCHAAL</text>
+          <rect class="kavel-scan" x="20" y="20" width="20" height="280" fill="url(#scanGradient)"/>
+        </svg>
+      </div>
     </div>
   </section>
 
@@ -1033,7 +1062,7 @@
     <div class="container">
       <div class="for-whom-head">
         <p class="eyebrow">Voor wie</p>
-        <h2 id="for-whom-title">Geschikt voor uitgiftes zoals<span class="accent-dot" aria-hidden="true"></span></h2>
+        <h2 id="for-whom-title">Geschikt voor uitgiftes zoals</h2>
         <p class="for-whom-intro">Of het nu om één strategische kavel gaat of een serie tenders per jaar, Uitgifte.com werkt voor de uitgifte-typen waar transparantie en procesborging het meest tellen.</p>
       </div>
       <ul class="for-whom-list">
@@ -1052,7 +1081,7 @@
   <section id="modules" class="modules-section scroll-reveal" aria-labelledby="modules-title">
     <div class="container">
       <div class="eyebrow">Modules · 5</div>
-      <h2 id="modules-title">Eén omgeving,<br>vijf werkstromen<span class="accent-dot" aria-hidden="true"></span></h2>
+      <h2 id="modules-title">Eén omgeving,<br>vijf werkstromen</h2>
       <p class="modules-lead">
         Van marktconforme publicatie tot procesdossier. Elke fase van een Didam-proof uitgifte in één samenhangende omgeving.
       </p>
@@ -1061,7 +1090,7 @@
         <div class="module-item">
           <div class="module-head">
             <span class="module-num">01</span>
-            <h3 class="module-name">Publicatie<span class="accent-dot" aria-hidden="true"></span></h3>
+            <h3 class="module-name">Publicatie</h3>
           </div>
           <p class="module-desc">Marktconforme aankondiging, vindbare projectpagina en gelijke informatie voor iedere gegadigde. Inclusief publicatie-kalender, automatische distributie en versie-archief.</p>
         </div>
@@ -1069,7 +1098,7 @@
         <div class="module-item">
           <div class="module-head">
             <span class="module-num">02</span>
-            <h3 class="module-name">Dataroom<span class="accent-dot" aria-hidden="true"></span></h3>
+            <h3 class="module-name">Dataroom</h3>
           </div>
           <p class="module-desc">Versiegecontroleerde documenten, lees-tracking en automatische verspreiding bij elke update. Iedere gegadigde ziet exact dezelfde stukken op exact hetzelfde moment.</p>
         </div>
@@ -1077,7 +1106,7 @@
         <div class="module-item">
           <div class="module-head">
             <span class="module-num">03</span>
-            <h3 class="module-name">Q&amp;A<span class="accent-dot" aria-hidden="true"></span></h3>
+            <h3 class="module-name">Q&amp;A</h3>
           </div>
           <p class="module-desc">Vragen anoniem, antwoorden openbaar. Zo blijft de informatie-positie aantoonbaar gelijk voor alle gegadigden, vanaf de eerste vraag tot de sluitingsdatum.</p>
         </div>
@@ -1085,7 +1114,7 @@
         <div class="module-item">
           <div class="module-head">
             <span class="module-num">04</span>
-            <h3 class="module-name">Inschrijvingen<span class="accent-dot" aria-hidden="true"></span></h3>
+            <h3 class="module-name">Inschrijvingen</h3>
           </div>
           <p class="module-desc">Gestructureerde inzendingen, validatie, versleutelde bijlagen en transparante deadlines. Inschrijvingen worden pas zichtbaar na het sluitingsmoment.</p>
         </div>
@@ -1094,7 +1123,7 @@
           <div>
             <div class="head">
               <span class="module-num" style="color: var(--ink); opacity: 0.6;">05</span>
-              <h3>Dossier<span class="accent-dot" aria-hidden="true"></span></h3>
+              <h3>Dossier</h3>
             </div>
             <p>Eén procesdossier: tijdlijn, beslismomenten, audit-trail en bewijslast voor toezicht of bezwaar. Direct exporteerbaar als PDF of als publiek dossier.</p>
           </div>
@@ -1128,7 +1157,7 @@
     <div class="container">
       <div class="benefits-head">
         <p class="eyebrow" style="color: var(--neon);">Resultaat</p>
-        <h2 id="benefits-title">Wat het je oplevert<span class="km km-neon accent-dot-neon" aria-hidden="true"></span></h2>
+        <h2 id="benefits-title">Wat het je oplevert</h2>
         <p class="benefits-intro">Minder handwerk, meer overzicht. Hieronder de praktische winst die organisaties ervaren als ze hun uitgifteproces via Uitgifte.com inrichten.</p>
       </div>
       <ul class="benefits-grid">
@@ -1167,7 +1196,7 @@
         <div class="eyebrow">Praktijk · ROM-D, Dordrecht</div>
       </div>
       <blockquote class="testimonial-quote">
-        &ldquo;De Didam-uitspraak vraagt om uitgiftes die <em>transparant én werkbaar</em> zijn. Met de methode van Uitgifte.com hebben we voor onze maritieme kavels de hele relevante markt kunnen bereiken en de keuze objectief kunnen onderbouwen, zonder dat we als gemeente de regie uit handen geven<span class="accent-dot" aria-hidden="true"></span>&rdquo;
+        &ldquo;De Didam-uitspraak vraagt om uitgiftes die <em>transparant én werkbaar</em> zijn. Met de methode van Uitgifte.com hebben we voor onze maritieme kavels de hele relevante markt kunnen bereiken en de keuze objectief kunnen onderbouwen, zonder dat we als gemeente de regie uit handen geven.&rdquo;
       </blockquote>
       <div class="testimonial-attrib">
         <img class="avatar" src="otto-verschoor.jpg" alt="" width="52" height="52" loading="lazy" decoding="async">
@@ -1179,65 +1208,17 @@
     </div>
   </section>
 
-  <!-- ============ KAVEL-GRID VISUAL (abstract, no fake case) ============ -->
-  <section class="showcase scroll-reveal" aria-label="Hoe een publicatie eruit ziet">
-    <div class="container">
-      <div class="showcase-card">
-        <div>
-          <div class="eyebrow" style="color: var(--ink); opacity: 0.7;">Visueel · Publicatie</div>
-          <h2>Eén kavel, één publiek proces<span class="accent-dot" aria-hidden="true"></span></h2>
-          <p>Van aankondiging tot gunning. Alle stappen, documenten en beslismomenten op één plek. Vindbaar, vergelijkbaar, verantwoordbaar.</p>
-        </div>
-        <div class="kavel-svg" aria-hidden="true">
-          <svg viewBox="0 0 480 320" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#EDFF00" stop-opacity="0"/>
-                <stop offset="50%" stop-color="#EDFF00" stop-opacity="0.55"/>
-                <stop offset="100%" stop-color="#EDFF00" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <g fill="none" stroke="#0D1B2A" stroke-width="1" opacity="0.35">
-              <rect x="20" y="20" width="440" height="280"/>
-              <line x1="20"  y1="110" x2="460" y2="110"/>
-              <line x1="20"  y1="210" x2="460" y2="210"/>
-              <line x1="160" y1="20"  x2="160" y2="300"/>
-              <line x1="320" y1="20"  x2="320" y2="300"/>
-            </g>
-            <g fill="none" stroke="#0D1B2A" stroke-width="1" stroke-dasharray="4 4" opacity="0.45">
-              <line x1="380" y1="20" x2="380" y2="300"/>
-            </g>
-            <rect class="kavel-active" x="162" y="112" width="156" height="96" fill="#0D1B2A" fill-opacity="0.10" stroke="#0D1B2A" stroke-width="1.25"/>
-            <g fill="#0D1B2A" opacity="0.45" font-family="Geist Mono, monospace" font-size="8" letter-spacing="1">
-              <text x="34"  y="50">K.01</text>
-              <text x="174" y="50">K.02</text>
-              <text x="334" y="50">K.03</text>
-              <text x="174" y="138">K.04</text>
-              <text x="334" y="138">K.05</text>
-              <text x="34"  y="138">K.06</text>
-              <text x="34"  y="238">K.07</text>
-              <text x="174" y="238">K.08</text>
-              <text x="334" y="238">K.09</text>
-            </g>
-            <g stroke="#0D1B2A" stroke-width="0.75" opacity="0.6">
-              <line x1="20" y1="312" x2="80" y2="312"/>
-              <line x1="20" y1="308" x2="20" y2="316"/>
-              <line x1="80" y1="308" x2="80" y2="316"/>
-            </g>
-            <text x="86" y="316" font-family="Geist Mono, monospace" font-size="8" fill="#0D1B2A" opacity="0.6" letter-spacing="1">SCHAAL</text>
-            <rect class="kavel-scan" x="20" y="20" width="20" height="280" fill="url(#scanGradient)"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Showcase block verwijderd: kavel-grid SVG is verhuisd naar de hero
+       als visual-companion van de tekst. Houdt structuur compacter en geeft
+       de hero direct visuele balans op desktop. -->
+
 
   <!-- ============ DIDAM EXPLAINER ============ -->
   <section id="didam" class="didam scroll-reveal" aria-labelledby="didam-title">
     <div class="container didam-grid">
       <div>
         <div class="eyebrow">Het arrest · ECLI:NL:HR:2021:1778</div>
-        <h2 id="didam-title">Mededingings-<br>ruimte<span class="accent-dot" aria-hidden="true"></span></h2>
+        <h2 id="didam-title">Mededingings-<br>ruimte</h2>
         <p class="intro">
           Het Didam-arrest verplicht overheden om bij verkoop van grond mededingingsruimte te bieden. Tenzij vaststaat dat er slechts één serieuze gegadigde is. Die afweging moet objectief, vooraf en publiek worden onderbouwd.
         </p>
@@ -1274,7 +1255,7 @@
   <section id="contact" class="contact-section scroll-reveal" aria-labelledby="contact-title">
     <div class="container">
       <div class="eyebrow">Contact</div>
-      <h2 id="contact-title">Liever even sparren met REPP<span class="km km-neon" aria-hidden="true"></span></h2>
+      <h2 id="contact-title">Liever even sparren met REPP</h2>
       <p class="lead-text">
         Uitgifte.com is een initiatief van REPP, Real Estate Performance Partner. We bouwen digitale infrastructuur voor de vastgoedsector en denken graag mee over jouw situatie. Plan een demo op jouw kavels of project, of mail ons rechtstreeks.
       </p>
@@ -1414,7 +1395,6 @@
       // ── Section-view (IntersectionObserver) ───────────────────────────
       if ('IntersectionObserver' in window) {
         var sections = [
-          { sel: '#why',       name: 'why' },
           { sel: '#voor-wie',  name: 'voor-wie' },
           { sel: '#modules',   name: 'modules' },
           { sel: '#resultaat', name: 'resultaat' },
