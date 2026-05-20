@@ -723,21 +723,10 @@
     .module-item:hover .module-num { color: var(--ink); }
     .module-item .module-head { display: flex; align-items: baseline; gap: 16px; }
     .module-item .module-num { font-family: var(--mono); font-size: 14px; color: var(--muted); transition: color 220ms var(--ease); }
-    .module-item .module-name { margin: 0; font-weight: 400; letter-spacing: -0.035em; line-height: 0.98; font-size: clamp(26px, 3vw, 32px); position: relative; }
-    .module-item .module-name::before {
-      content: "";
-      position: absolute;
-      left: -24px;
-      top: 50%;
-      width: 0;
-      height: 1px;
-      background: var(--ink);
-      transform: translateY(-50%);
-      transition: width 280ms var(--ease);
-    }
-    @media (min-width: 760px) {
-      .module-item:hover .module-name::before { width: 16px; }
-    }
+    .module-item .module-name { margin: 0; font-weight: 400; letter-spacing: -0.035em; line-height: 0.98; font-size: clamp(26px, 3vw, 32px); }
+    /* hover-streep verwijderd: gaf rare visuele lijn bij text-selectie van
+       het module-nummer, vooral op touch en in screenshots. de hover van
+       module-num naar ink-color is duidelijk genoeg als affordance. */
     .module-item .module-desc { margin: 16px 0 0; font-size: 15px; line-height: 1.65; color: var(--muted); max-width: 44ch; }
 
     .dossier-tile { background: var(--sky); padding: 40px; grid-column: 1 / -1; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
@@ -785,7 +774,18 @@
       font-size: clamp(26px, 3.4vw, 48px);
       max-width: 26ch;
     }
-    .testimonial-quote em { font-style: normal; border-bottom: 3px solid var(--neon); padding-bottom: 3px; }
+    /* Highlight-stijl in plaats van onderlijn: neon-gele markering achter
+       de woorden zelf, alsof iemand met markeerstift door de tekst gehaald
+       heeft. box-decoration-break zorgt dat de markering netjes meeloopt
+       bij line-wrap. */
+    .testimonial-quote em {
+      font-style: normal;
+      background: var(--neon);
+      padding: 0 6px;
+      margin: 0 -2px;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
     .testimonial-attrib { margin: 44px 0 0; display: flex; align-items: center; gap: 18px; }
     .testimonial-attrib .avatar {
       width: 52px; height: 52px;
