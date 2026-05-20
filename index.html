@@ -780,46 +780,31 @@
       color: var(--ink-soft);
     }
 
-    /* Modules secondary CTA — chat trigger directly below the grid */
-    .modules-cta {
-      margin: 24px 0 0;
-      padding: 18px 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      align-items: center;
+    /* Modules secondary CTA — single question-as-button, sentence-case
+       to feel conversational rather than imperative. */
+    .cta--question {
+      margin-top: 28px;
+      width: 100%;
+      max-width: 720px;
       justify-content: space-between;
-      border: 1px solid var(--gold-mid);
+      padding: 16px 26px;
+      font-size: 0.74rem;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 500;
+      line-height: 1.35;
       background: var(--gold-soft);
     }
 
-    .modules-cta__text {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 0;
+    .cta--question:hover,
+    .cta--question:focus-visible {
+      background: var(--gold);
+      color: var(--paper);
     }
 
-    .modules-cta__eye {
-      margin: 0;
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: var(--tracking-caps-wide);
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .modules-cta__line {
-      margin: 0;
-      font-size: 0.96rem;
-      font-weight: 500;
-      color: var(--ink);
-      line-height: 1.4;
-    }
-
-    .modules-cta .cta {
-      margin-top: 0;
-      flex-shrink: 0;
+    .cta--question > span:first-child {
+      text-align: left;
+      padding-right: 16px;
     }
 
     /* ============ CONTACT ============ */
@@ -1025,14 +1010,9 @@
       .modules-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      .modules-cta {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px 22px 22px;
-      }
-      .modules-cta .cta {
-        width: 100%;
-        justify-content: space-between;
+      .cta--question {
+        padding: 14px 22px;
+        font-size: 0.7rem;
       }
       .contact {
         margin: 36px auto 24px;
@@ -1127,7 +1107,7 @@
       </a>
       <div class="topbar-actions reveal r-1">
         <a class="topbar-contact" href="mailto:info@repp.nl">info@repp.nl</a>
-        <a class="topbar-cta" href="https://uitgifte.clp.repp.nl" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'topbar'}})">
+        <a class="topbar-cta" href="https://uitgifte.clp.repp.nl/?chat=1" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'topbar'}})">
           <span>Start de chat</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
@@ -1170,7 +1150,7 @@
           <li>Corporaties</li>
         </ul>
 
-        <a class="cta reveal r-6" href="https://uitgifte.clp.repp.nl" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'hero'}})">
+        <a class="cta reveal r-6" href="https://uitgifte.clp.repp.nl/?chat=1" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'hero'}})">
           <span>Start de chat</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
@@ -1288,16 +1268,10 @@
         </li>
       </ul>
 
-      <aside class="modules-cta" role="complementary" aria-label="Vervolgactie">
-        <div class="modules-cta__text">
-          <p class="modules-cta__eye">Toepassen</p>
-          <p class="modules-cta__line">Benieuwd hoe dit voor jouw gemeente kan werken?</p>
-        </div>
-        <a class="cta" href="https://uitgifte.clp.repp.nl" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'modules-foot'}})">
-          <span>Start de chat</span>
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-      </aside>
+      <a class="cta cta--question" href="https://uitgifte.clp.repp.nl/?chat=1" onclick="window.plausible &amp;&amp; window.plausible('cta:start-chat', {props:{location:'modules-foot'}})">
+        <span>Benieuwd hoe dit voor jouw gemeente kan werken?</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
     </section>
 
     <!-- CONTACT -->
