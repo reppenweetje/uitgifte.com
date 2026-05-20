@@ -480,6 +480,138 @@
     .hero-audience .sep { font-family: var(--mono); font-size: 13px; color: var(--muted); }
     .hero-audience .item { font-family: var(--mono); font-size: 13px; color: var(--ink); }
 
+    /* Hero subregel: tweede paragraph onder hero-lead, kleinere font,
+       muted maar leesbaar. Geeft direct doelgroep-context na de lead. */
+    .hero-sub {
+      margin: 24px 0 0;
+      font-size: clamp(16px, 1.3vw, 18px);
+      line-height: 1.55;
+      color: var(--ink);
+      opacity: 0.7;
+      max-width: 60ch;
+      letter-spacing: -0.008em;
+    }
+
+    /* ============ VOOR WIE (use-cases) ============ */
+    .for-whom { padding: 100px 0 80px; }
+    @media (max-width: 640px) { .for-whom { padding: 64px 0 48px; } }
+    .for-whom-head { margin-bottom: 48px; max-width: 64ch; }
+    .for-whom-head h2 {
+      margin: 16px 0 0;
+      font-weight: 400; letter-spacing: -0.035em; line-height: 0.98;
+      font-size: clamp(34px, 5vw, 64px);
+    }
+    .for-whom-intro {
+      margin: 24px 0 0;
+      font-size: clamp(16px, 1.4vw, 19px);
+      line-height: 1.5;
+      color: var(--muted);
+      letter-spacing: -0.01em;
+      max-width: 54ch;
+    }
+    .for-whom-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid var(--hair-strong);
+    }
+    @media (min-width: 760px) {
+      .for-whom-list { grid-template-columns: 1fr 1fr; column-gap: 64px; }
+    }
+    .for-whom-list li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--hair-strong);
+      font-size: clamp(16px, 1.3vw, 18px);
+      color: var(--ink);
+      letter-spacing: -0.008em;
+      transition: padding-left 280ms var(--ease), color 220ms var(--ease);
+    }
+    .for-whom-list li:hover {
+      padding-left: 8px;
+    }
+    .for-whom-list li .km { width: 10px; height: 10px; }
+
+    /* ============ WAT LEVERT HET OP (benefits) ============ */
+    .benefits { background: var(--ink); color: var(--bone); padding: 110px 0; }
+    @media (max-width: 640px) { .benefits { padding: 72px 0; } }
+    .benefits-head { max-width: 64ch; margin-bottom: 56px; }
+    .benefits-head h2 {
+      margin: 16px 0 0;
+      font-weight: 400; letter-spacing: -0.035em; line-height: 0.98;
+      font-size: clamp(34px, 5vw, 64px);
+      color: var(--bone);
+    }
+    .benefits-head h2 .accent-dot-neon {
+      width: 0.22em; height: 0.22em;
+      margin-left: 0.04em;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+    .benefits-intro {
+      margin: 24px 0 0;
+      font-size: clamp(16px, 1.4vw, 19px);
+      line-height: 1.55;
+      color: rgba(244, 241, 232, 0.7);
+      max-width: 56ch;
+      letter-spacing: -0.01em;
+    }
+    .benefits-grid {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: rgba(244, 241, 232, 0.18);
+      border: 1px solid rgba(244, 241, 232, 0.18);
+    }
+    @media (min-width: 720px)  { .benefits-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .benefits-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .benefit-card {
+      background: var(--ink);
+      padding: 32px 28px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 180px;
+      transition: background 220ms var(--ease);
+      position: relative;
+    }
+    .benefit-card:hover {
+      background: #14283d;
+    }
+    .benefit-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      color: var(--neon);
+    }
+    .benefit-text {
+      margin: 0;
+      font-size: clamp(16px, 1.4vw, 18px);
+      line-height: 1.45;
+      color: var(--bone);
+      font-weight: 400;
+      letter-spacing: -0.008em;
+    }
+    .benefit-card::after {
+      content: "";
+      position: absolute;
+      right: 22px; bottom: 22px;
+      width: 12px; height: 12px;
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23EDFF00' stroke-width='14' stroke-linecap='square'><path d='M0,30 L0,0 L30,0'/><path d='M70,0 L100,0 L100,30'/><path d='M0,70 L0,100 L30,100'/><path d='M70,100 L100,100 L100,70'/></svg>") center/contain no-repeat;
+      opacity: 0;
+      transition: opacity 220ms var(--ease);
+    }
+    .benefit-card:hover::after { opacity: 1; }
+
     /* ============ KAVEL VISUAL (showcase block) ============ */
     .showcase {
       padding: 24px 0 80px;
@@ -834,8 +966,9 @@
         <span>uitgifte</span><span class="km" aria-hidden="true"></span><span class="com">com</span>
       </a>
       <nav class="nav" aria-label="Hoofdmenu">
-        <a href="#why" class="nav-link">Waarom</a>
+        <a href="#voor-wie" class="nav-link">Voor wie</a>
         <a href="#modules" class="nav-link">Modules</a>
+        <a href="#resultaat" class="nav-link">Resultaat</a>
         <a href="#praktijk" class="nav-link">Praktijk</a>
         <a href="#didam" class="nav-link">Didam</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -865,7 +998,11 @@
       </h1>
 
       <p class="hero-lead reveal r-3">
-        Eén digitale omgeving voor publicatie, documentdeling, Q&amp;A, inschrijvingen en procesdossiervorming. Zodat elke uitgifte leesbaar, eerlijk en controleerbaar verloopt.
+        Uitgifte.com bundelt publicatie, documentdeling, Q&amp;A, inschrijvingen en dossieropbouw in één centrale omgeving. Zo verloopt elke uitgifte overzichtelijk, eerlijk en controleerbaar, met minder handwerk voor de organisatie en gelijke informatie voor iedere gegadigde.
+      </p>
+
+      <p class="hero-sub reveal r-3">
+        Ingericht voor gemeenten, ontwikkelaars, grondbedrijven en corporaties die vastgoed of grond zorgvuldig en professioneel willen uitgeven.
       </p>
 
       <aside class="why reveal r-4" id="why" aria-labelledby="why-title">
@@ -888,16 +1025,26 @@
         <a class="nav-link" href="#modules" style="opacity: 0.7;">of lees eerst verder ↓</a>
       </div>
 
-      <div class="hero-audience reveal r-6" aria-label="Doelgroep">
-        <span class="eyebrow">Voor</span>
-        <span class="item">Gemeenten</span>
-        <span class="sep">/</span>
-        <span class="item">Ontwikkelaars</span>
-        <span class="sep">/</span>
-        <span class="item">Grondbedrijven</span>
-        <span class="sep">/</span>
-        <span class="item">Corporaties</span>
+    </div>
+  </section>
+
+  <!-- ============ VOOR WIE ============ -->
+  <section id="voor-wie" class="for-whom scroll-reveal" aria-labelledby="for-whom-title">
+    <div class="container">
+      <div class="for-whom-head">
+        <p class="eyebrow">Voor wie</p>
+        <h2 id="for-whom-title">Geschikt voor uitgiftes zoals<span class="accent-dot" aria-hidden="true"></span></h2>
+        <p class="for-whom-intro">Of het nu om één strategische kavel gaat of een serie tenders per jaar, Uitgifte.com werkt voor de uitgifte-typen waar transparantie en procesborging het meest tellen.</p>
       </div>
+      <ul class="for-whom-list">
+        <li><span class="km" aria-hidden="true"></span><span>Gemeentelijke kavels</span></li>
+        <li><span class="km" aria-hidden="true"></span><span>Bedrijfskavels</span></li>
+        <li><span class="km" aria-hidden="true"></span><span>Maatschappelijk vastgoed</span></li>
+        <li><span class="km" aria-hidden="true"></span><span>Erfpachtuitgiftes</span></li>
+        <li><span class="km" aria-hidden="true"></span><span>Tenderprocedures</span></li>
+        <li><span class="km" aria-hidden="true"></span><span>Eén-op-één uitgiftes met publicatie en motivering</span></li>
+        <li><span class="km" aria-hidden="true"></span><span>Marktconsultaties voorafgaand aan uitgifte</span></li>
+      </ul>
     </div>
   </section>
 
@@ -973,6 +1120,43 @@
           <span class="arr" aria-hidden="true"></span>
         </a>
       </aside>
+    </div>
+  </section>
+
+  <!-- ============ WAT LEVERT HET OP ============ -->
+  <section id="resultaat" class="benefits scroll-reveal" aria-labelledby="benefits-title">
+    <div class="container">
+      <div class="benefits-head">
+        <p class="eyebrow" style="color: var(--neon);">Resultaat</p>
+        <h2 id="benefits-title">Wat het je oplevert<span class="km km-neon accent-dot-neon" aria-hidden="true"></span></h2>
+        <p class="benefits-intro">Minder handwerk, meer overzicht. Hieronder de praktische winst die organisaties ervaren als ze hun uitgifteproces via Uitgifte.com inrichten.</p>
+      </div>
+      <ul class="benefits-grid">
+        <li class="benefit-card">
+          <span class="benefit-num">01</span>
+          <p class="benefit-text">Eén centrale informatiebron voor alle gegadigden</p>
+        </li>
+        <li class="benefit-card">
+          <span class="benefit-num">02</span>
+          <p class="benefit-text">Minder handmatig mail- en documentbeheer</p>
+        </li>
+        <li class="benefit-card">
+          <span class="benefit-num">03</span>
+          <p class="benefit-text">Q&amp;A openbaar en gelijk beschikbaar</p>
+        </li>
+        <li class="benefit-card">
+          <span class="benefit-num">04</span>
+          <p class="benefit-text">Inschrijvingen gestructureerd en veilig ontvangen</p>
+        </li>
+        <li class="benefit-card">
+          <span class="benefit-num">05</span>
+          <p class="benefit-text">Compleet procesdossier voor bezwaar, toezicht of interne besluitvorming</p>
+        </li>
+        <li class="benefit-card">
+          <span class="benefit-num">06</span>
+          <p class="benefit-text">Sneller opschaalbaar naar volgende uitgiftes</p>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -1230,11 +1414,13 @@
       // ── Section-view (IntersectionObserver) ───────────────────────────
       if ('IntersectionObserver' in window) {
         var sections = [
-          { sel: '#why',      name: 'why' },
-          { sel: '#modules',  name: 'modules' },
-          { sel: '#praktijk', name: 'praktijk' },
-          { sel: '#didam',    name: 'didam' },
-          { sel: '#contact',  name: 'contact' }
+          { sel: '#why',       name: 'why' },
+          { sel: '#voor-wie',  name: 'voor-wie' },
+          { sel: '#modules',   name: 'modules' },
+          { sel: '#resultaat', name: 'resultaat' },
+          { sel: '#praktijk',  name: 'praktijk' },
+          { sel: '#didam',     name: 'didam' },
+          { sel: '#contact',   name: 'contact' }
         ];
         var seen = {};
         var io = new IntersectionObserver(function (entries) {
