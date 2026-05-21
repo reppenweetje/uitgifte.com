@@ -183,7 +183,9 @@
     :root {
       --bone:  #F4F1E8;
       --ink:   #0D1B2A;
-      --muted: #6E7480;
+      /* muted: secondary text. Donkerder gezet zodat 'ie WCAG AA (4.5:1)
+         haalt op zowel bone als canvas-2 (was #6E7480 = 4.16:1, te licht). */
+      --muted: #5E6571;
       --sky:   #C9DCE8;
       --neon:  #EDFF00;
       --hair:  rgba(13, 27, 42, 0.10);
@@ -312,10 +314,12 @@
       display: flex; align-items: center; justify-content: space-between; gap: 18px;
     }
     .wordmark { font-family: var(--font); font-size: 22px; font-weight: 400; letter-spacing: -0.035em; line-height: 1; color: var(--ink); }
-    /* Kavel-mark in de wordmark: kleiner dan de letterhoogte (matcht de
-       verhouding van het officiële uitgifte.com-logo). translateY tilt 'm
-       op tot het midden van de x-hoogte zodat 'ie niet op de baseline zakt. */
-    .wordmark .km { width: 6px; height: 6px; transform: translateY(-2px); }
+    /* Kavel-mark in de wordmark: kleiner dan de letterhoogte, met de
+       onderkant exact op de baseline. Zo staat 'ie even laag als 'com' en
+       de onderkant van 'uitgifte', precies als het officiële logo.
+       Geen translateY-lift: het flex-ouder (.wm, align-items:baseline)
+       legt de onderrand van het vierkantje op de tekst-baseline. */
+    .wordmark .km { width: 6px; height: 6px; }
     .nav { display: none; align-items: center; gap: 40px; }
     .nav-link {
       font-family: var(--mono);
@@ -362,11 +366,10 @@
       cursor: pointer;
       transition: background 200ms var(--ease), color 200ms var(--ease), transform 180ms var(--ease);
     }
-    .pill:hover, .pill:focus-visible {
-      background: var(--ink);
-      color: var(--bone);
-      outline: none;
-    }
+    .pill:hover { background: var(--ink); color: var(--bone); }
+    /* focus-visible behoudt de neon-outline (zie generieke focus-regel)
+       bovenop de kleurinversie, voor zichtbare keyboard-focus. */
+    .pill:focus-visible { background: var(--ink); color: var(--bone); }
     .pill .arr { width: 14px; height: 1px; background: currentColor; position: relative; }
     .pill .arr::after {
       content: ""; position: absolute; right: 0; top: -3px;
@@ -480,7 +483,8 @@
       max-width: 56ch;
     }
 
-    /* Secundair scroll-pad onder CTA. Geen vetgedrukt, blijft rustig. */
+    /* Secundair scroll-pad onder CTA. Muted-kleur ipv ink-op-opacity,
+       zodat 't WCAG AA haalt en toch rustig/secundair blijft. */
     .hero-scroll-link {
       margin: 40px 0 0;
       display: inline-block;
@@ -488,14 +492,12 @@
       font-size: 12px;
       letter-spacing: 0.10em;
       text-transform: uppercase;
-      color: var(--ink);
-      opacity: 0.6;
-      transition: opacity 220ms var(--ease), transform 220ms var(--ease);
+      color: var(--muted);
+      transition: color 220ms var(--ease), transform 220ms var(--ease);
     }
     .hero-scroll-link:hover, .hero-scroll-link:focus-visible {
-      opacity: 1;
+      color: var(--ink);
       transform: translateY(2px);
-      outline: none;
     }
 
     /* ============ WAAROM (zonder/met-vergelijking) ============ */
@@ -755,44 +757,7 @@
     }
     .benefit-card:hover::after { opacity: 1; }
 
-    /* ============ KAVEL VISUAL (showcase block) ============ */
-    .showcase {
-      padding: 24px 0 80px;
-    }
-    .showcase-card {
-      background: var(--sky);
-      padding: 56px 48px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    @media (min-width: 900px) {
-      .showcase-card { grid-template-columns: 1fr 1.15fr; gap: 56px; padding: 72px 64px; }
-    }
-    .showcase-card h2 {
-      margin: 22px 0 0;
-      font-weight: 400; letter-spacing: -0.035em; line-height: 0.98;
-      font-size: clamp(32px, 4vw, 48px);
-      max-width: 16ch;
-    }
-    .showcase-card p {
-      margin: 22px 0 0;
-      font-size: 16px; line-height: 1.6;
-      color: var(--ink);
-      opacity: 0.75;
-      max-width: 44ch;
-    }
-    .showcase-stats {
-      margin: 32px 0 0;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-      max-width: 380px;
-    }
-    .showcase-stats .stat-num { font-weight: 400; letter-spacing: -0.035em; line-height: 0.98; font-size: 28px; }
-    .showcase-stats .stat-lbl { margin-top: 4px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-
-    .kavel-svg svg { display: block; width: 100%; height: auto; }
-
+    /* ============ KAVEL-GRID ANIMATIE (hero-visual) ============ */
     /* Scan-line: een neon-gekleurde verticale veeg die periodiek over de
        kavel-grid beweegt. Geeft het abstract beeld een levend gevoel zonder
        het rustige design te verstoren. Frequenter dan elke 7 sec voelt te
@@ -884,7 +849,9 @@
     .module-item { transition: transform 220ms var(--ease); }
     .module-item:hover .module-num { color: var(--ink); }
     .module-item .module-head { display: flex; align-items: baseline; gap: 16px; }
-    .module-item .module-num { font-family: var(--mono); font-size: 14px; color: var(--muted); transition: color 220ms var(--ease); }
+    /* .module-num ongebonden (niet .module-item-scoped) zodat ook de "05"
+       in de dossier-tile dezelfde mono/muted-stijl krijgt. */
+    .module-num { font-family: var(--mono); font-size: 14px; color: var(--muted); transition: color 220ms var(--ease); }
     .module-item .module-name { margin: 0; font-weight: 400; letter-spacing: -0.035em; line-height: 0.98; font-size: clamp(26px, 3vw, 32px); }
     /* hover-streep verwijderd: gaf rare visuele lijn bij text-selectie van
        het module-nummer, vooral op touch en in screenshots. de hover van
@@ -974,14 +941,6 @@
     }
     .testimonial-attrib .name { font-family: var(--mono); font-size: 14px; color: var(--ink); }
     .testimonial-attrib .org { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
-
-    /* ============ STATS BAND ============ */
-    .stats-band { background: var(--sky); padding: 56px 0; }
-    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
-    @media (min-width: 760px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
-    .stat-big { font-weight: 400; letter-spacing: -0.035em; line-height: 0.98; font-size: clamp(40px, 5vw, 64px); }
-    .stat-big .suffix { font-size: 0.55em; }
-    .stat-lbl-big { margin: 8px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 
     /* ============ DIDAM EXPLAINER ============ */
     .didam { padding: 110px 0; }
@@ -1105,8 +1064,6 @@
       /* Dossier-tile op mobile compacter */
       .dossier-tile { padding: 28px 22px; }
       .dossier-row { grid-template-columns: 56px 1fr 60px; gap: 10px; font-size: 12px; }
-      /* Stats band mobile: 2x2 grid is al ok, font kleiner */
-      .stat-big { font-size: clamp(36px, 12vw, 56px); }
       /* Contact cards full-width met aangepaste padding */
       .contact-card { padding: 28px 22px; }
       /* Modules-cta-strip stacking */
@@ -1386,7 +1343,7 @@
         <div class="dossier-tile">
           <div>
             <div class="head">
-              <span class="module-num" style="color: var(--ink); opacity: 0.6;">05</span>
+              <span class="module-num">05</span>
               <h3>Dossier</h3>
             </div>
             <p>Eén procesdossier: tijdlijn, beslismomenten, audit-trail en onderbouwing bij toezicht, bezwaar of interne besluitvorming. Direct exporteerbaar als PDF of als publiek dossier.</p>
