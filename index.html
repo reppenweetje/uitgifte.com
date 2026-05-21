@@ -634,7 +634,9 @@
     }
     @media (max-width: 640px) {
       .compare-cell { font-size: 14.5px; }
-      .waarom-chips li { font-size: 11px; padding: 9px 13px; }
+      /* Chips op mobiel volle breedte: stapelen tot één strak uitgelijnde
+         kolom in plaats van rafelig wrappen. */
+      .waarom-chips li { font-size: 11px; padding: 10px 14px; width: 100%; }
     }
 
     /* ============ VOOR WIE (use-cases) ============ */
@@ -1025,7 +1027,7 @@
       border-top: 1px solid var(--hair-strong);
     }
     .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; }
-    .footer-links { display: flex; align-items: center; gap: 28px; }
+    .footer-links { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
 
     /* ============ REVEAL ANIMATION ============ */
     .reveal { opacity: 0; transform: translateY(12px); }
@@ -1061,8 +1063,13 @@
       .hero-visual { display: none; }
       /* Hero scroll-link minder ruimte op mobile */
       .hero-scroll-link { margin-top: 28px; }
-      /* For-whom chips iets compacter op mobile */
-      .for-whom-list li { padding: 10px 14px; font-size: 12px; }
+      /* For-whom chips op mobiel volle breedte: strak uitgelijnde kolom
+         in plaats van rafelig wrappen. */
+      .for-whom-list li { padding: 10px 14px; font-size: 12px; width: 100%; }
+      /* Didam-CTA's op mobiel volle breedte, gecentreerd, gestapeld,
+         consistent met de hero- en modules-CTA's. */
+      .didam-cta-row { gap: 12px; }
+      .didam-cta-row .pill { width: 100%; justify-content: center; }
       /* Dossier-tile op mobile compacter */
       .dossier-tile { padding: 28px 22px; }
       .dossier-row { grid-template-columns: 56px 1fr 60px; gap: 10px; font-size: 12px; }
@@ -1071,6 +1078,9 @@
       /* Modules-cta-strip stacking */
       .modules-cta-strip { padding: 24px 22px; gap: 16px; }
       .modules-cta-strip .pill--primary { width: 100%; justify-content: space-between; }
+      /* Footer op mobiel als nette linksuitgelijnde kolom ipv
+         rafelig space-between-wrap. */
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
       /* Nav-bar hoogte iets kleiner op mobile */
       .topbar-inner { height: 64px; }
     }
@@ -1222,7 +1232,7 @@
         <div class="eyebrow">Praktijk · ROM-D, Dordrecht</div>
       </div>
       <blockquote class="testimonial-quote">
-        &ldquo;De Didam-uitspraak vraagt om uitgiftes die <em>transparant én werkbaar</em> zijn. Met de methode van Uitgifte.com hebben we voor onze maritieme kavels de hele relevante markt kunnen bereiken en de keuze objectief kunnen onderbouwen, zonder dat we als gemeente de regie uit handen geven.&rdquo;
+        &ldquo;De Didam-uitspraak vraagt om uitgiftes die transparant én werkbaar zijn. Met de methode van Uitgifte.com hebben we voor onze maritieme kavels de hele relevante markt kunnen bereiken en de keuze objectief kunnen onderbouwen, zonder dat we als gemeente de regie uit handen geven. <em>Een aanpak die ik andere gemeentes zonder meer kan aanraden.</em>&rdquo;
       </blockquote>
       <div class="testimonial-attrib">
         <img class="avatar" src="otto-verschoor.jpg" alt="" width="52" height="52" loading="lazy" decoding="async">
@@ -1518,8 +1528,9 @@
       <div class="footer-links">
         <a class="nav-link" href="https://repp.nl" target="_blank" rel="noopener noreferrer">REPP ↗</a>
         <a class="nav-link" href="#contact">Contact</a>
+        <a class="nav-link" href="https://repp.nl/wp-content/uploads/2025/03/PRIVACY-VERKLARING.pdf" target="_blank" rel="noopener noreferrer">Privacy ↗</a>
       </div>
-      <div class="eyebrow">Een initiatief van REPP · 2026</div>
+      <div class="eyebrow">&copy; 2026 REPP · Alle rechten voorbehouden</div>
     </div>
   </footer>
 
