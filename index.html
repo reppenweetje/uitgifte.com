@@ -910,8 +910,10 @@
     }
 
     /* ============ TESTIMONIAL ============ */
-    .testimonial-section { padding: 120px 0; }
-    @media (max-width: 640px) { .testimonial-section { padding: 72px 0; } }
+    /* Staat direct onder de hero: top-padding teruggebracht zodat de quote
+       niet te ver van de hero af zweeft, bottom in lijn met het sectie-ritme. */
+    .testimonial-section { padding: 88px 0 100px; }
+    @media (max-width: 640px) { .testimonial-section { padding: 56px 0 64px; } }
     .testimonial-section .eyebrow-row .eyebrow { color: var(--ink); }
     .testimonial-quote {
       margin: 32px 0 0;
@@ -1119,9 +1121,9 @@
         <span>uitgifte</span><span class="km" aria-hidden="true"></span><span class="com">com</span>
       </a>
       <nav class="nav" aria-label="Hoofdmenu">
+        <a href="#praktijk" class="nav-link">Praktijk</a>
         <a href="#voor-wie" class="nav-link">Voor wie</a>
         <a href="#modules" class="nav-link">Modules</a>
-        <a href="#praktijk" class="nav-link">Praktijk</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
       <div class="topbar-right">
@@ -1209,6 +1211,25 @@
           <text x="86" y="316" font-family="Geist Mono, monospace" font-size="8" fill="#0D1B2A" opacity="0.6" letter-spacing="1">SCHAAL</text>
           <rect class="kavel-scan" x="20" y="20" width="20" height="280" fill="url(#scanGradient)"/>
         </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIAL ============ -->
+  <section id="praktijk" class="testimonial-section scroll-reveal" aria-label="Klantenervaring">
+    <div class="container">
+      <div class="eyebrow-row">
+        <div class="eyebrow">Praktijk · ROM-D, Dordrecht</div>
+      </div>
+      <blockquote class="testimonial-quote">
+        &ldquo;De Didam-uitspraak vraagt om uitgiftes die <em>transparant én werkbaar</em> zijn. Met de methode van Uitgifte.com hebben we voor onze maritieme kavels de hele relevante markt kunnen bereiken en de keuze objectief kunnen onderbouwen, zonder dat we als gemeente de regie uit handen geven.&rdquo;
+      </blockquote>
+      <div class="testimonial-attrib">
+        <img class="avatar" src="otto-verschoor.jpg" alt="" width="52" height="52" loading="lazy" decoding="async">
+        <div>
+          <div class="name">Otto Verschoor</div>
+          <div class="org">ROM-D · Gemeente Dordrecht en Drechtsteden</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1412,30 +1433,6 @@
       </ul>
     </div>
   </section>
-
-  <!-- ============ TESTIMONIAL ============ -->
-  <section id="praktijk" class="testimonial-section scroll-reveal" aria-label="Klantenervaring">
-    <div class="container">
-      <div class="eyebrow-row">
-        <div class="eyebrow">Praktijk · ROM-D, Dordrecht</div>
-      </div>
-      <blockquote class="testimonial-quote">
-        &ldquo;De Didam-uitspraak vraagt om uitgiftes die <em>transparant én werkbaar</em> zijn. Met de methode van Uitgifte.com hebben we voor onze maritieme kavels de hele relevante markt kunnen bereiken en de keuze objectief kunnen onderbouwen, zonder dat we als gemeente de regie uit handen geven.&rdquo;
-      </blockquote>
-      <div class="testimonial-attrib">
-        <img class="avatar" src="otto-verschoor.jpg" alt="" width="52" height="52" loading="lazy" decoding="async">
-        <div>
-          <div class="name">Otto Verschoor</div>
-          <div class="org">ROM-D · Gemeente Dordrecht en Drechtsteden</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Showcase block verwijderd: kavel-grid SVG is verhuisd naar de hero
-       als visual-companion van de tekst. Houdt structuur compacter en geeft
-       de hero direct visuele balans op desktop. -->
-
 
   <!-- ============ DIDAM EXPLAINER ============ -->
   <section id="didam" class="didam scroll-reveal" aria-labelledby="didam-title">
@@ -1653,11 +1650,11 @@
       // ── Section-view (IntersectionObserver) ───────────────────────────
       if ('IntersectionObserver' in window) {
         var sections = [
+          { sel: '#praktijk',  name: 'praktijk' },
           { sel: '#waarom',    name: 'waarom' },
           { sel: '#voor-wie',  name: 'voor-wie' },
           { sel: '#modules',   name: 'modules' },
           { sel: '#resultaat', name: 'resultaat' },
-          { sel: '#praktijk',  name: 'praktijk' },
           { sel: '#didam',     name: 'didam' },
           { sel: '#contact',   name: 'contact' }
         ];
